@@ -1,0 +1,748 @@
+USE [master]
+GO
+/****** Object:  Database [InstitueProject]    Script Date: 08/01/2023 12:34:06 ق.ظ ******/
+CREATE DATABASE [InstitueProject]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'InstitueProject', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\InstitueProject.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'InstitueProject_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\InstitueProject_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [InstitueProject] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [InstitueProject].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [InstitueProject] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [InstitueProject] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [InstitueProject] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [InstitueProject] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [InstitueProject] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [InstitueProject] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [InstitueProject] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [InstitueProject] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [InstitueProject] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [InstitueProject] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [InstitueProject] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [InstitueProject] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [InstitueProject] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [InstitueProject] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [InstitueProject] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [InstitueProject] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [InstitueProject] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [InstitueProject] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [InstitueProject] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [InstitueProject] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [InstitueProject] SET READ_COMMITTED_SNAPSHOT ON 
+GO
+ALTER DATABASE [InstitueProject] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [InstitueProject] SET RECOVERY FULL 
+GO
+ALTER DATABASE [InstitueProject] SET  MULTI_USER 
+GO
+ALTER DATABASE [InstitueProject] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [InstitueProject] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [InstitueProject] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [InstitueProject] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [InstitueProject] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [InstitueProject] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'InstitueProject', N'ON'
+GO
+ALTER DATABASE [InstitueProject] SET QUERY_STORE = OFF
+GO
+USE [InstitueProject]
+GO
+/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[__EFMigrationsHistory](
+	[MigrationId] [nvarchar](150) NOT NULL,
+	[ProductVersion] [nvarchar](32) NOT NULL,
+ CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY CLUSTERED 
+(
+	[MigrationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LessonDetails]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LessonDetails](
+	[LessonDetailId] [int] IDENTITY(1,1) NOT NULL,
+	[LessonId] [int] NOT NULL,
+	[UserId] [int] NOT NULL,
+	[LessonLink] [nvarchar](max) NULL,
+	[LessonLinkDescription] [nvarchar](max) NULL,
+	[LessonPdfFile] [nvarchar](max) NULL,
+	[LessonPdfFileDescription] [nvarchar](max) NULL,
+	[LessonPracticeFile] [nvarchar](max) NULL,
+	[LessonPracticeFileDescription] [nvarchar](max) NULL,
+	[LessonPracticeFileExpireDate] [datetime2](7) NULL,
+	[LessonProjectFile] [nvarchar](max) NULL,
+	[LessonProjectFileDescription] [nvarchar](max) NULL,
+	[LessonProjectFileExpireDate] [datetime2](7) NULL,
+	[LessonVideoFile] [nvarchar](max) NULL,
+	[LessonVideoFileDescription] [nvarchar](max) NULL,
+	[LessonAlert] [nvarchar](max) NULL,
+	[IsDelete] [bit] NOT NULL,
+ CONSTRAINT [PK_LessonDetails] PRIMARY KEY CLUSTERED 
+(
+	[LessonDetailId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LessonMajors]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LessonMajors](
+	[LM_Id] [int] IDENTITY(1,1) NOT NULL,
+	[LessonId] [int] NOT NULL,
+	[MajorId] [int] NOT NULL,
+ CONSTRAINT [PK_LessonMajors] PRIMARY KEY CLUSTERED 
+(
+	[LM_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LessonPractice]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LessonPractice](
+	[LessonPracticeId] [int] IDENTITY(1,1) NOT NULL,
+	[LessonDetailId] [int] NOT NULL,
+	[UserId] [int] NOT NULL,
+	[LessonPracticeFile] [nvarchar](max) NULL,
+	[LessonPracticeDescription] [nvarchar](max) NULL,
+	[UploadDate] [datetime2](7) NOT NULL,
+	[LessonId] [int] NOT NULL,
+ CONSTRAINT [PK_LessonPractice] PRIMARY KEY CLUSTERED 
+(
+	[LessonPracticeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LessonProject]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LessonProject](
+	[LessonProjectId] [int] IDENTITY(1,1) NOT NULL,
+	[LessonDetailId] [int] NOT NULL,
+	[UserId] [int] NOT NULL,
+	[LessonProjectFile] [nvarchar](max) NULL,
+	[LessonProjectDescription] [nvarchar](max) NULL,
+	[UploadDate] [datetime2](7) NOT NULL,
+	[LessonId] [int] NOT NULL,
+ CONSTRAINT [PK_LessonProject] PRIMARY KEY CLUSTERED 
+(
+	[LessonProjectId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Lessons]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Lessons](
+	[LessonId] [int] IDENTITY(1,1) NOT NULL,
+	[LessonTitle] [nvarchar](max) NULL,
+	[IsExistOnThisYear] [bit] NOT NULL,
+	[IsDelete] [bit] NOT NULL,
+ CONSTRAINT [PK_Lessons] PRIMARY KEY CLUSTERED 
+(
+	[LessonId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Majors]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Majors](
+	[MajorId] [int] IDENTITY(1,1) NOT NULL,
+	[MajorTitle] [nvarchar](max) NOT NULL,
+	[description] [nvarchar](max) NULL,
+	[IsDelete] [bit] NOT NULL,
+ CONSTRAINT [PK_Majors] PRIMARY KEY CLUSTERED 
+(
+	[MajorId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Permissions]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Permissions](
+	[PermissionId] [int] IDENTITY(1,1) NOT NULL,
+	[PermissionTitle] [nvarchar](200) NOT NULL,
+	[ParentID] [int] NULL,
+ CONSTRAINT [PK_Permissions] PRIMARY KEY CLUSTERED 
+(
+	[PermissionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RolePermissions]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RolePermissions](
+	[RP_Id] [int] IDENTITY(1,1) NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[PermissionId] [int] NOT NULL,
+ CONSTRAINT [PK_RolePermissions] PRIMARY KEY CLUSTERED 
+(
+	[RP_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Roles]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Roles](
+	[RoleId] [int] IDENTITY(1,1) NOT NULL,
+	[RoleTitle] [nvarchar](200) NOT NULL,
+	[IsDelete] [bit] NOT NULL,
+ CONSTRAINT [PK_Roles] PRIMARY KEY CLUSTERED 
+(
+	[RoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserLessons]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserLessons](
+	[UL_id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[LessonId] [int] NOT NULL,
+	[MajorId] [int] NULL,
+ CONSTRAINT [PK_UserLessons] PRIMARY KEY CLUSTERED 
+(
+	[UL_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserMajors]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserMajors](
+	[MU_Id] [int] IDENTITY(1,1) NOT NULL,
+	[MajorId] [int] NOT NULL,
+	[UserId] [int] NOT NULL,
+ CONSTRAINT [PK_UserMajors] PRIMARY KEY CLUSTERED 
+(
+	[MU_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserRoles]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserRoles](
+	[UR_Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[RoleId] [int] NOT NULL,
+ CONSTRAINT [PK_UserRoles] PRIMARY KEY CLUSTERED 
+(
+	[UR_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[UserId] [int] IDENTITY(1,1) NOT NULL,
+	[UserName] [nvarchar](200) NOT NULL,
+	[FirstName] [nvarchar](200) NOT NULL,
+	[LastName] [nvarchar](200) NOT NULL,
+	[Email] [nvarchar](200) NULL,
+	[Password] [nvarchar](200) NOT NULL,
+	[BirthDate] [datetime2](7) NOT NULL,
+	[PhoneNumber] [nvarchar](11) NOT NULL,
+	[HomeNumber] [nvarchar](11) NOT NULL,
+	[Address] [nvarchar](200) NOT NULL,
+	[UniversitySignDate] [datetime2](7) NOT NULL,
+	[StudentNumber] [nvarchar](max) NULL,
+	[IsTeacher] [bit] NOT NULL,
+	[TeacherNumber] [nvarchar](max) NULL,
+	[Degree] [nvarchar](max) NOT NULL,
+	[IsActive] [bit] NOT NULL,
+	[UserAvatarName] [nvarchar](200) NULL,
+	[RegistersDate] [datetime2](7) NOT NULL,
+	[IsDelete] [bit] NOT NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20221208112602_m1', N'3.1.29')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20221209220540_m11', N'3.1.29')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20221212084030_details', N'3.1.29')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20221212084117_detail2', N'3.1.29')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20221212084816_m12', N'3.1.29')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20221212190155_editdetails', N'3.1.29')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20221227100342_project', N'3.1.29')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20221227202858_upda', N'3.1.29')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20221227203749_upda', N'3.1.29')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20221227203856_propra', N'3.1.29')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20221227204123_proprac', N'3.1.29')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20221227210219_propra', N'3.1.29')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20221228204242_update', N'3.1.29')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20221228205716_updatepractice', N'3.1.29')
+GO
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20221229084631_update-date', N'3.1.29')
+GO
+SET IDENTITY_INSERT [dbo].[LessonDetails] ON 
+GO
+INSERT [dbo].[LessonDetails] ([LessonDetailId], [LessonId], [UserId], [LessonLink], [LessonLinkDescription], [LessonPdfFile], [LessonPdfFileDescription], [LessonPracticeFile], [LessonPracticeFileDescription], [LessonPracticeFileExpireDate], [LessonProjectFile], [LessonProjectFileDescription], [LessonProjectFileExpireDate], [LessonVideoFile], [LessonVideoFileDescription], [LessonAlert], [IsDelete]) VALUES (4, 3, 2, N'https://www.google.com/', N'جلسه اول', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0)
+GO
+INSERT [dbo].[LessonDetails] ([LessonDetailId], [LessonId], [UserId], [LessonLink], [LessonLinkDescription], [LessonPdfFile], [LessonPdfFileDescription], [LessonPracticeFile], [LessonPracticeFileDescription], [LessonPracticeFileExpireDate], [LessonProjectFile], [LessonProjectFileDescription], [LessonProjectFileExpireDate], [LessonVideoFile], [LessonVideoFileDescription], [LessonAlert], [IsDelete]) VALUES (7, 3, 2, N'https://www.google.com/', N'جلسه دوم', N'.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'.jpg', NULL, N'این هفته کلاس روز سه شنبه  10/6 تشکیل نخواهد شد', 1)
+GO
+INSERT [dbo].[LessonDetails] ([LessonDetailId], [LessonId], [UserId], [LessonLink], [LessonLinkDescription], [LessonPdfFile], [LessonPdfFileDescription], [LessonPracticeFile], [LessonPracticeFileDescription], [LessonPracticeFileExpireDate], [LessonProjectFile], [LessonProjectFileDescription], [LessonProjectFileExpireDate], [LessonVideoFile], [LessonVideoFileDescription], [LessonAlert], [IsDelete]) VALUES (10, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'.zip', NULL, NULL, 1)
+GO
+INSERT [dbo].[LessonDetails] ([LessonDetailId], [LessonId], [UserId], [LessonLink], [LessonLinkDescription], [LessonPdfFile], [LessonPdfFileDescription], [LessonPracticeFile], [LessonPracticeFileDescription], [LessonPracticeFileExpireDate], [LessonProjectFile], [LessonProjectFileDescription], [LessonProjectFileExpireDate], [LessonVideoFile], [LessonVideoFileDescription], [LessonAlert], [IsDelete]) VALUES (11, 3, 2, NULL, NULL, N'VHDLCh1.pdf', N'اسلاید های جلسه 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0)
+GO
+INSERT [dbo].[LessonDetails] ([LessonDetailId], [LessonId], [UserId], [LessonLink], [LessonLinkDescription], [LessonPdfFile], [LessonPdfFileDescription], [LessonPracticeFile], [LessonPracticeFileDescription], [LessonPracticeFileExpireDate], [LessonProjectFile], [LessonProjectFileDescription], [LessonProjectFileExpireDate], [LessonVideoFile], [LessonVideoFileDescription], [LessonAlert], [IsDelete]) VALUES (12, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'2ea3c579-b590-4179-bb53-d78084d3e1caaspcore (4).jpg', N'ویدیو جلسه 1', NULL, 1)
+GO
+INSERT [dbo].[LessonDetails] ([LessonDetailId], [LessonId], [UserId], [LessonLink], [LessonLinkDescription], [LessonPdfFile], [LessonPdfFileDescription], [LessonPracticeFile], [LessonPracticeFileDescription], [LessonPracticeFileExpireDate], [LessonProjectFile], [LessonProjectFileDescription], [LessonProjectFileExpireDate], [LessonVideoFile], [LessonVideoFileDescription], [LessonAlert], [IsDelete]) VALUES (13, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'ba0d7188a44640cc93a78b19a18480a9.pdf', N'پروژه اول', CAST(N'1401-11-12T00:00:00.0000000' AS DateTime2), NULL, NULL, NULL, 0)
+GO
+INSERT [dbo].[LessonDetails] ([LessonDetailId], [LessonId], [UserId], [LessonLink], [LessonLinkDescription], [LessonPdfFile], [LessonPdfFileDescription], [LessonPracticeFile], [LessonPracticeFileDescription], [LessonPracticeFileExpireDate], [LessonProjectFile], [LessonProjectFileDescription], [LessonProjectFileExpireDate], [LessonVideoFile], [LessonVideoFileDescription], [LessonAlert], [IsDelete]) VALUES (14, 3, 2, NULL, NULL, NULL, NULL, N'project 3.pdf', NULL, CAST(N'1401-11-11T00:00:00.0000000' AS DateTime2), NULL, NULL, NULL, NULL, NULL, NULL, 1)
+GO
+INSERT [dbo].[LessonDetails] ([LessonDetailId], [LessonId], [UserId], [LessonLink], [LessonLinkDescription], [LessonPdfFile], [LessonPdfFileDescription], [LessonPracticeFile], [LessonPracticeFileDescription], [LessonPracticeFileExpireDate], [LessonProjectFile], [LessonProjectFileDescription], [LessonProjectFileExpireDate], [LessonVideoFile], [LessonVideoFileDescription], [LessonAlert], [IsDelete]) VALUES (15, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1)
+GO
+INSERT [dbo].[LessonDetails] ([LessonDetailId], [LessonId], [UserId], [LessonLink], [LessonLinkDescription], [LessonPdfFile], [LessonPdfFileDescription], [LessonPracticeFile], [LessonPracticeFileDescription], [LessonPracticeFileExpireDate], [LessonProjectFile], [LessonProjectFileDescription], [LessonProjectFileExpireDate], [LessonVideoFile], [LessonVideoFileDescription], [LessonAlert], [IsDelete]) VALUES (16, 3, 2, NULL, NULL, NULL, NULL, N'7adb5f5495774fa18dc7d3ef3c16824c.pdf', N'تمرین اول', CAST(N'1401-11-11T00:00:00.0000000' AS DateTime2), NULL, NULL, NULL, NULL, NULL, NULL, 0)
+GO
+INSERT [dbo].[LessonDetails] ([LessonDetailId], [LessonId], [UserId], [LessonLink], [LessonLinkDescription], [LessonPdfFile], [LessonPdfFileDescription], [LessonPracticeFile], [LessonPracticeFileDescription], [LessonPracticeFileExpireDate], [LessonProjectFile], [LessonProjectFileDescription], [LessonProjectFileExpireDate], [LessonVideoFile], [LessonVideoFileDescription], [LessonAlert], [IsDelete]) VALUES (17, 3, 2, NULL, NULL, NULL, NULL, N'38fe2f172ca041cfb46d7df88950709c.pdf', N'تمرین دوم', CAST(N'1401-11-11T00:00:00.0000000' AS DateTime2), NULL, NULL, NULL, NULL, NULL, NULL, 0)
+GO
+INSERT [dbo].[LessonDetails] ([LessonDetailId], [LessonId], [UserId], [LessonLink], [LessonLinkDescription], [LessonPdfFile], [LessonPdfFileDescription], [LessonPracticeFile], [LessonPracticeFileDescription], [LessonPracticeFileExpireDate], [LessonProjectFile], [LessonProjectFileDescription], [LessonProjectFileExpireDate], [LessonVideoFile], [LessonVideoFileDescription], [LessonAlert], [IsDelete]) VALUES (18, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'2f892137fc374e148ba6068928d8eedc.pdf', N'پروژه دوم', CAST(N'1401-11-11T00:00:00.0000000' AS DateTime2), NULL, NULL, NULL, 0)
+GO
+INSERT [dbo].[LessonDetails] ([LessonDetailId], [LessonId], [UserId], [LessonLink], [LessonLinkDescription], [LessonPdfFile], [LessonPdfFileDescription], [LessonPracticeFile], [LessonPracticeFileDescription], [LessonPracticeFileExpireDate], [LessonProjectFile], [LessonProjectFileDescription], [LessonProjectFileExpireDate], [LessonVideoFile], [LessonVideoFileDescription], [LessonAlert], [IsDelete]) VALUES (19, 3, 2, NULL, NULL, NULL, NULL, N'f84616ad1fe045c7be73fe9e7f6b02d5.pdf', N'تمرین سوم', CAST(N'1401-11-11T00:00:00.0000000' AS DateTime2), NULL, NULL, NULL, NULL, NULL, NULL, 0)
+GO
+INSERT [dbo].[LessonDetails] ([LessonDetailId], [LessonId], [UserId], [LessonLink], [LessonLinkDescription], [LessonPdfFile], [LessonPdfFileDescription], [LessonPracticeFile], [LessonPracticeFileDescription], [LessonPracticeFileExpireDate], [LessonProjectFile], [LessonProjectFileDescription], [LessonProjectFileExpireDate], [LessonVideoFile], [LessonVideoFileDescription], [LessonAlert], [IsDelete]) VALUES (20, 8, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'لطفا ویدیو های آپلود شده را مشاهده کنید.', 0)
+GO
+INSERT [dbo].[LessonDetails] ([LessonDetailId], [LessonId], [UserId], [LessonLink], [LessonLinkDescription], [LessonPdfFile], [LessonPdfFileDescription], [LessonPracticeFile], [LessonPracticeFileDescription], [LessonPracticeFileExpireDate], [LessonProjectFile], [LessonProjectFileDescription], [LessonProjectFileExpireDate], [LessonVideoFile], [LessonVideoFileDescription], [LessonAlert], [IsDelete]) VALUES (21, 8, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'f83935929192407b92cdc310e1cb8152.pdf', N'پروژه اول', CAST(N'1401-11-13T00:00:00.0000000' AS DateTime2), NULL, NULL, NULL, 0)
+GO
+SET IDENTITY_INSERT [dbo].[LessonDetails] OFF
+GO
+SET IDENTITY_INSERT [dbo].[LessonMajors] ON 
+GO
+INSERT [dbo].[LessonMajors] ([LM_Id], [LessonId], [MajorId]) VALUES (1, 3, 1)
+GO
+INSERT [dbo].[LessonMajors] ([LM_Id], [LessonId], [MajorId]) VALUES (2, 4, 2)
+GO
+INSERT [dbo].[LessonMajors] ([LM_Id], [LessonId], [MajorId]) VALUES (3, 7, 1)
+GO
+INSERT [dbo].[LessonMajors] ([LM_Id], [LessonId], [MajorId]) VALUES (5, 1, 1)
+GO
+INSERT [dbo].[LessonMajors] ([LM_Id], [LessonId], [MajorId]) VALUES (6, 1, 2)
+GO
+INSERT [dbo].[LessonMajors] ([LM_Id], [LessonId], [MajorId]) VALUES (7, 1, 3)
+GO
+INSERT [dbo].[LessonMajors] ([LM_Id], [LessonId], [MajorId]) VALUES (8, 1, 5)
+GO
+INSERT [dbo].[LessonMajors] ([LM_Id], [LessonId], [MajorId]) VALUES (9, 1, 6)
+GO
+INSERT [dbo].[LessonMajors] ([LM_Id], [LessonId], [MajorId]) VALUES (10, 1, 7)
+GO
+INSERT [dbo].[LessonMajors] ([LM_Id], [LessonId], [MajorId]) VALUES (11, 2, 1)
+GO
+INSERT [dbo].[LessonMajors] ([LM_Id], [LessonId], [MajorId]) VALUES (12, 8, 1)
+GO
+SET IDENTITY_INSERT [dbo].[LessonMajors] OFF
+GO
+SET IDENTITY_INSERT [dbo].[LessonPractice] ON 
+GO
+INSERT [dbo].[LessonPractice] ([LessonPracticeId], [LessonDetailId], [UserId], [LessonPracticeFile], [LessonPracticeDescription], [UploadDate], [LessonId]) VALUES (16, 16, 1, N'968f2dace1b5404da527a9bcaecd83bd.pdf', N'تمرین اول', CAST(N'2022-12-29T00:51:34.0623251' AS DateTime2), 3)
+GO
+INSERT [dbo].[LessonPractice] ([LessonPracticeId], [LessonDetailId], [UserId], [LessonPracticeFile], [LessonPracticeDescription], [UploadDate], [LessonId]) VALUES (17, 17, 1, N'2d705c43ff524114a6c1e61f7f1fd7ee.pdf', N'تمرین دوم', CAST(N'2022-12-29T13:24:55.9417673' AS DateTime2), 3)
+GO
+INSERT [dbo].[LessonPractice] ([LessonPracticeId], [LessonDetailId], [UserId], [LessonPracticeFile], [LessonPracticeDescription], [UploadDate], [LessonId]) VALUES (18, 19, 1, N'4e4e8eda79324e788455d743138d102d.pdf', N'تمرین سوم', CAST(N'2022-12-29T13:33:53.5868808' AS DateTime2), 3)
+GO
+SET IDENTITY_INSERT [dbo].[LessonPractice] OFF
+GO
+SET IDENTITY_INSERT [dbo].[LessonProject] ON 
+GO
+INSERT [dbo].[LessonProject] ([LessonProjectId], [LessonDetailId], [UserId], [LessonProjectFile], [LessonProjectDescription], [UploadDate], [LessonId]) VALUES (10, 13, 1, N'c696fdf2bc6046c2a9956fb5f3021508.pdf', N'پروژه اول', CAST(N'2022-12-29T00:50:37.9155024' AS DateTime2), 3)
+GO
+INSERT [dbo].[LessonProject] ([LessonProjectId], [LessonDetailId], [UserId], [LessonProjectFile], [LessonProjectDescription], [UploadDate], [LessonId]) VALUES (11, 13, 3, N'6256268252ba48f7af8142dfc1a6fcb2.pdf', N'پروژه اول', CAST(N'2022-12-29T01:00:32.8278168' AS DateTime2), 3)
+GO
+INSERT [dbo].[LessonProject] ([LessonProjectId], [LessonDetailId], [UserId], [LessonProjectFile], [LessonProjectDescription], [UploadDate], [LessonId]) VALUES (12, 21, 1, N'375c0853535c4631b3d0cfedc05e4800.pdf', N'پروژه اول', CAST(N'2022-12-29T14:03:31.5068026' AS DateTime2), 8)
+GO
+SET IDENTITY_INSERT [dbo].[LessonProject] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Lessons] ON 
+GO
+INSERT [dbo].[Lessons] ([LessonId], [LessonTitle], [IsExistOnThisYear], [IsDelete]) VALUES (1, N'مبانی نظری اسلام 1', 1, 0)
+GO
+INSERT [dbo].[Lessons] ([LessonId], [LessonTitle], [IsExistOnThisYear], [IsDelete]) VALUES (2, N'شبکه کامپیوتری', 1, 0)
+GO
+INSERT [dbo].[Lessons] ([LessonId], [LessonTitle], [IsExistOnThisYear], [IsDelete]) VALUES (3, N'طراحی سیستم', 1, 0)
+GO
+INSERT [dbo].[Lessons] ([LessonId], [LessonTitle], [IsExistOnThisYear], [IsDelete]) VALUES (4, N'شیمی آلی', 1, 0)
+GO
+INSERT [dbo].[Lessons] ([LessonId], [LessonTitle], [IsExistOnThisYear], [IsDelete]) VALUES (5, N'ریاضی 1', 1, 0)
+GO
+INSERT [dbo].[Lessons] ([LessonId], [LessonTitle], [IsExistOnThisYear], [IsDelete]) VALUES (6, N'ساختمان داده', 1, 0)
+GO
+INSERT [dbo].[Lessons] ([LessonId], [LessonTitle], [IsExistOnThisYear], [IsDelete]) VALUES (7, N'برنامه نویسی 1', 1, 0)
+GO
+INSERT [dbo].[Lessons] ([LessonId], [LessonTitle], [IsExistOnThisYear], [IsDelete]) VALUES (8, N'رباتیک', 1, 0)
+GO
+SET IDENTITY_INSERT [dbo].[Lessons] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Majors] ON 
+GO
+INSERT [dbo].[Majors] ([MajorId], [MajorTitle], [description], [IsDelete]) VALUES (1, N' کامپیوتر', N'--', 0)
+GO
+INSERT [dbo].[Majors] ([MajorId], [MajorTitle], [description], [IsDelete]) VALUES (2, N'شیمی', NULL, 0)
+GO
+INSERT [dbo].[Majors] ([MajorId], [MajorTitle], [description], [IsDelete]) VALUES (3, N'ریاضی', NULL, 0)
+GO
+INSERT [dbo].[Majors] ([MajorId], [MajorTitle], [description], [IsDelete]) VALUES (4, N'علوم کامپیوتر', NULL, 1)
+GO
+INSERT [dbo].[Majors] ([MajorId], [MajorTitle], [description], [IsDelete]) VALUES (5, N'علوم کامپیوتر', N'--', 0)
+GO
+INSERT [dbo].[Majors] ([MajorId], [MajorTitle], [description], [IsDelete]) VALUES (6, N'ادبیات ', NULL, 0)
+GO
+INSERT [dbo].[Majors] ([MajorId], [MajorTitle], [description], [IsDelete]) VALUES (7, N'اقتصاد', NULL, 0)
+GO
+SET IDENTITY_INSERT [dbo].[Majors] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Permissions] ON 
+GO
+INSERT [dbo].[Permissions] ([PermissionId], [PermissionTitle], [ParentID]) VALUES (1, N'دسترسی ادمین', NULL)
+GO
+INSERT [dbo].[Permissions] ([PermissionId], [PermissionTitle], [ParentID]) VALUES (2, N'دسترسی استاد', NULL)
+GO
+INSERT [dbo].[Permissions] ([PermissionId], [PermissionTitle], [ParentID]) VALUES (3, N'دسترسی دانشجو', NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Permissions] OFF
+GO
+SET IDENTITY_INSERT [dbo].[RolePermissions] ON 
+GO
+INSERT [dbo].[RolePermissions] ([RP_Id], [RoleId], [PermissionId]) VALUES (5, 2, 2)
+GO
+INSERT [dbo].[RolePermissions] ([RP_Id], [RoleId], [PermissionId]) VALUES (7, 3, 1)
+GO
+INSERT [dbo].[RolePermissions] ([RP_Id], [RoleId], [PermissionId]) VALUES (9, 1, 3)
+GO
+SET IDENTITY_INSERT [dbo].[RolePermissions] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Roles] ON 
+GO
+INSERT [dbo].[Roles] ([RoleId], [RoleTitle], [IsDelete]) VALUES (1, N'دانشجو', 0)
+GO
+INSERT [dbo].[Roles] ([RoleId], [RoleTitle], [IsDelete]) VALUES (2, N'استاد', 0)
+GO
+INSERT [dbo].[Roles] ([RoleId], [RoleTitle], [IsDelete]) VALUES (3, N'ادمین', 0)
+GO
+SET IDENTITY_INSERT [dbo].[Roles] OFF
+GO
+SET IDENTITY_INSERT [dbo].[UserLessons] ON 
+GO
+INSERT [dbo].[UserLessons] ([UL_id], [UserId], [LessonId], [MajorId]) VALUES (23, 2, 8, NULL)
+GO
+INSERT [dbo].[UserLessons] ([UL_id], [UserId], [LessonId], [MajorId]) VALUES (24, 2, 3, NULL)
+GO
+INSERT [dbo].[UserLessons] ([UL_id], [UserId], [LessonId], [MajorId]) VALUES (25, 1, 3, NULL)
+GO
+INSERT [dbo].[UserLessons] ([UL_id], [UserId], [LessonId], [MajorId]) VALUES (26, 1, 7, NULL)
+GO
+INSERT [dbo].[UserLessons] ([UL_id], [UserId], [LessonId], [MajorId]) VALUES (27, 1, 1, NULL)
+GO
+INSERT [dbo].[UserLessons] ([UL_id], [UserId], [LessonId], [MajorId]) VALUES (28, 1, 2, NULL)
+GO
+INSERT [dbo].[UserLessons] ([UL_id], [UserId], [LessonId], [MajorId]) VALUES (29, 1, 8, NULL)
+GO
+INSERT [dbo].[UserLessons] ([UL_id], [UserId], [LessonId], [MajorId]) VALUES (30, 3, 3, NULL)
+GO
+INSERT [dbo].[UserLessons] ([UL_id], [UserId], [LessonId], [MajorId]) VALUES (31, 3, 7, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[UserLessons] OFF
+GO
+SET IDENTITY_INSERT [dbo].[UserMajors] ON 
+GO
+INSERT [dbo].[UserMajors] ([MU_Id], [MajorId], [UserId]) VALUES (16, 1, 3)
+GO
+INSERT [dbo].[UserMajors] ([MU_Id], [MajorId], [UserId]) VALUES (17, 1, 1)
+GO
+INSERT [dbo].[UserMajors] ([MU_Id], [MajorId], [UserId]) VALUES (18, 1, 2)
+GO
+SET IDENTITY_INSERT [dbo].[UserMajors] OFF
+GO
+SET IDENTITY_INSERT [dbo].[UserRoles] ON 
+GO
+INSERT [dbo].[UserRoles] ([UR_Id], [UserId], [RoleId]) VALUES (12, 3, 1)
+GO
+INSERT [dbo].[UserRoles] ([UR_Id], [UserId], [RoleId]) VALUES (13, 1, 1)
+GO
+INSERT [dbo].[UserRoles] ([UR_Id], [UserId], [RoleId]) VALUES (14, 1, 3)
+GO
+INSERT [dbo].[UserRoles] ([UR_Id], [UserId], [RoleId]) VALUES (15, 2, 2)
+GO
+SET IDENTITY_INSERT [dbo].[UserRoles] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Users] ON 
+GO
+INSERT [dbo].[Users] ([UserId], [UserName], [FirstName], [LastName], [Email], [Password], [BirthDate], [PhoneNumber], [HomeNumber], [Address], [UniversitySignDate], [StudentNumber], [IsTeacher], [TeacherNumber], [Degree], [IsActive], [UserAvatarName], [RegistersDate], [IsDelete]) VALUES (1, N'ali', N'علی', N'طعامی', N'alitaami81@gmail.com', N'20-2C-B9-62-AC-59-07-5B-96-4B-07-15-2D-23-4B-70', CAST(N'1381-07-19T00:00:00.0000000' AS DateTime2), N'09301327634', N'04133334175', N'الهی پرست', CAST(N'1399-10-10T00:00:00.0000000' AS DateTime2), N'995361021', 0, NULL, N'دیپلم', 1, N'1ffb819b70834561a08ae6f8074488aa.jpg', CAST(N'2022-12-08T15:01:40.8459718' AS DateTime2), 0)
+GO
+INSERT [dbo].[Users] ([UserId], [UserName], [FirstName], [LastName], [Email], [Password], [BirthDate], [PhoneNumber], [HomeNumber], [Address], [UniversitySignDate], [StudentNumber], [IsTeacher], [TeacherNumber], [Degree], [IsActive], [UserAvatarName], [RegistersDate], [IsDelete]) VALUES (2, N'hadi', N'هادی', N'اقدسی', N'hadiovic1@gmail.com', N'20-2C-B9-62-AC-59-07-5B-96-4B-07-15-2D-23-4B-70', CAST(N'1350-01-01T00:00:00.0000000' AS DateTime2), N'09148585885', N'04138885555', N'تبریز', CAST(N'1389-01-01T00:00:00.0000000' AS DateTime2), NULL, 1, N'801219859', N'دکترای رباتیک', 1, N'f46832d339ca443ea83feb568b19bd74.jpg', CAST(N'2022-12-11T15:12:47.4578966' AS DateTime2), 0)
+GO
+INSERT [dbo].[Users] ([UserId], [UserName], [FirstName], [LastName], [Email], [Password], [BirthDate], [PhoneNumber], [HomeNumber], [Address], [UniversitySignDate], [StudentNumber], [IsTeacher], [TeacherNumber], [Degree], [IsActive], [UserAvatarName], [RegistersDate], [IsDelete]) VALUES (3, N'alitaami', N'علی', N'طعاموویچ', N'alitamii81@gmail.com', N'20-2C-B9-62-AC-59-07-5B-96-4B-07-15-2D-23-4B-70', CAST(N'1381-10-11T00:00:00.0000000' AS DateTime2), N'09147751028', N'04133334175', N'الهی پرست 18متری دوم پ26', CAST(N'1399-10-10T00:00:00.0000000' AS DateTime2), N'995361019', 0, NULL, N'لیسانس', 1, N'defaultavatar.jpg', CAST(N'2022-12-21T00:00:00.0000000' AS DateTime2), 0)
+GO
+SET IDENTITY_INSERT [dbo].[Users] OFF
+GO
+/****** Object:  Index [IX_LessonDetails_LessonId]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+CREATE NONCLUSTERED INDEX [IX_LessonDetails_LessonId] ON [dbo].[LessonDetails]
+(
+	[LessonId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_LessonDetails_UserId]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+CREATE NONCLUSTERED INDEX [IX_LessonDetails_UserId] ON [dbo].[LessonDetails]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_LessonMajors_LessonId]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+CREATE NONCLUSTERED INDEX [IX_LessonMajors_LessonId] ON [dbo].[LessonMajors]
+(
+	[LessonId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_LessonMajors_MajorId]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+CREATE NONCLUSTERED INDEX [IX_LessonMajors_MajorId] ON [dbo].[LessonMajors]
+(
+	[MajorId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_LessonPractice_LessonDetailId]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+CREATE NONCLUSTERED INDEX [IX_LessonPractice_LessonDetailId] ON [dbo].[LessonPractice]
+(
+	[LessonDetailId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_LessonProject_LessonDetailId]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+CREATE NONCLUSTERED INDEX [IX_LessonProject_LessonDetailId] ON [dbo].[LessonProject]
+(
+	[LessonDetailId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Permissions_ParentID]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+CREATE NONCLUSTERED INDEX [IX_Permissions_ParentID] ON [dbo].[Permissions]
+(
+	[ParentID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_RolePermissions_PermissionId]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+CREATE NONCLUSTERED INDEX [IX_RolePermissions_PermissionId] ON [dbo].[RolePermissions]
+(
+	[PermissionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_RolePermissions_RoleId]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+CREATE NONCLUSTERED INDEX [IX_RolePermissions_RoleId] ON [dbo].[RolePermissions]
+(
+	[RoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_UserLessons_LessonId]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+CREATE NONCLUSTERED INDEX [IX_UserLessons_LessonId] ON [dbo].[UserLessons]
+(
+	[LessonId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_UserLessons_MajorId]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+CREATE NONCLUSTERED INDEX [IX_UserLessons_MajorId] ON [dbo].[UserLessons]
+(
+	[MajorId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_UserLessons_UserId]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+CREATE NONCLUSTERED INDEX [IX_UserLessons_UserId] ON [dbo].[UserLessons]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_UserMajors_MajorId]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+CREATE NONCLUSTERED INDEX [IX_UserMajors_MajorId] ON [dbo].[UserMajors]
+(
+	[MajorId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_UserMajors_UserId]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+CREATE NONCLUSTERED INDEX [IX_UserMajors_UserId] ON [dbo].[UserMajors]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_UserRoles_RoleId]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+CREATE NONCLUSTERED INDEX [IX_UserRoles_RoleId] ON [dbo].[UserRoles]
+(
+	[RoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_UserRoles_UserId]    Script Date: 08/01/2023 12:34:07 ق.ظ ******/
+CREATE NONCLUSTERED INDEX [IX_UserRoles_UserId] ON [dbo].[UserRoles]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[LessonPractice] ADD  DEFAULT ((0)) FOR [LessonId]
+GO
+ALTER TABLE [dbo].[LessonProject] ADD  DEFAULT ((0)) FOR [LessonId]
+GO
+ALTER TABLE [dbo].[LessonDetails]  WITH CHECK ADD  CONSTRAINT [FK_LessonDetails_Lessons_LessonId] FOREIGN KEY([LessonId])
+REFERENCES [dbo].[Lessons] ([LessonId])
+GO
+ALTER TABLE [dbo].[LessonDetails] CHECK CONSTRAINT [FK_LessonDetails_Lessons_LessonId]
+GO
+ALTER TABLE [dbo].[LessonDetails]  WITH CHECK ADD  CONSTRAINT [FK_LessonDetails_Users_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserId])
+GO
+ALTER TABLE [dbo].[LessonDetails] CHECK CONSTRAINT [FK_LessonDetails_Users_UserId]
+GO
+ALTER TABLE [dbo].[LessonMajors]  WITH CHECK ADD  CONSTRAINT [FK_LessonMajors_Lessons_LessonId] FOREIGN KEY([LessonId])
+REFERENCES [dbo].[Lessons] ([LessonId])
+GO
+ALTER TABLE [dbo].[LessonMajors] CHECK CONSTRAINT [FK_LessonMajors_Lessons_LessonId]
+GO
+ALTER TABLE [dbo].[LessonMajors]  WITH CHECK ADD  CONSTRAINT [FK_LessonMajors_Majors_MajorId] FOREIGN KEY([MajorId])
+REFERENCES [dbo].[Majors] ([MajorId])
+GO
+ALTER TABLE [dbo].[LessonMajors] CHECK CONSTRAINT [FK_LessonMajors_Majors_MajorId]
+GO
+ALTER TABLE [dbo].[LessonPractice]  WITH CHECK ADD  CONSTRAINT [FK_LessonPractice_LessonDetails_LessonDetailId] FOREIGN KEY([LessonDetailId])
+REFERENCES [dbo].[LessonDetails] ([LessonDetailId])
+GO
+ALTER TABLE [dbo].[LessonPractice] CHECK CONSTRAINT [FK_LessonPractice_LessonDetails_LessonDetailId]
+GO
+ALTER TABLE [dbo].[LessonProject]  WITH CHECK ADD  CONSTRAINT [FK_LessonProject_LessonDetails_LessonDetailId] FOREIGN KEY([LessonDetailId])
+REFERENCES [dbo].[LessonDetails] ([LessonDetailId])
+GO
+ALTER TABLE [dbo].[LessonProject] CHECK CONSTRAINT [FK_LessonProject_LessonDetails_LessonDetailId]
+GO
+ALTER TABLE [dbo].[Permissions]  WITH CHECK ADD  CONSTRAINT [FK_Permissions_Permissions_ParentID] FOREIGN KEY([ParentID])
+REFERENCES [dbo].[Permissions] ([PermissionId])
+GO
+ALTER TABLE [dbo].[Permissions] CHECK CONSTRAINT [FK_Permissions_Permissions_ParentID]
+GO
+ALTER TABLE [dbo].[RolePermissions]  WITH CHECK ADD  CONSTRAINT [FK_RolePermissions_Permissions_PermissionId] FOREIGN KEY([PermissionId])
+REFERENCES [dbo].[Permissions] ([PermissionId])
+GO
+ALTER TABLE [dbo].[RolePermissions] CHECK CONSTRAINT [FK_RolePermissions_Permissions_PermissionId]
+GO
+ALTER TABLE [dbo].[RolePermissions]  WITH CHECK ADD  CONSTRAINT [FK_RolePermissions_Roles_RoleId] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[Roles] ([RoleId])
+GO
+ALTER TABLE [dbo].[RolePermissions] CHECK CONSTRAINT [FK_RolePermissions_Roles_RoleId]
+GO
+ALTER TABLE [dbo].[UserLessons]  WITH CHECK ADD  CONSTRAINT [FK_UserLessons_Lessons_LessonId] FOREIGN KEY([LessonId])
+REFERENCES [dbo].[Lessons] ([LessonId])
+GO
+ALTER TABLE [dbo].[UserLessons] CHECK CONSTRAINT [FK_UserLessons_Lessons_LessonId]
+GO
+ALTER TABLE [dbo].[UserLessons]  WITH CHECK ADD  CONSTRAINT [FK_UserLessons_Users_MajorId] FOREIGN KEY([MajorId])
+REFERENCES [dbo].[Users] ([UserId])
+GO
+ALTER TABLE [dbo].[UserLessons] CHECK CONSTRAINT [FK_UserLessons_Users_MajorId]
+GO
+ALTER TABLE [dbo].[UserLessons]  WITH CHECK ADD  CONSTRAINT [FK_UserLessons_Users_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserId])
+GO
+ALTER TABLE [dbo].[UserLessons] CHECK CONSTRAINT [FK_UserLessons_Users_UserId]
+GO
+ALTER TABLE [dbo].[UserMajors]  WITH CHECK ADD  CONSTRAINT [FK_UserMajors_Majors_MajorId] FOREIGN KEY([MajorId])
+REFERENCES [dbo].[Majors] ([MajorId])
+GO
+ALTER TABLE [dbo].[UserMajors] CHECK CONSTRAINT [FK_UserMajors_Majors_MajorId]
+GO
+ALTER TABLE [dbo].[UserMajors]  WITH CHECK ADD  CONSTRAINT [FK_UserMajors_Users_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserId])
+GO
+ALTER TABLE [dbo].[UserMajors] CHECK CONSTRAINT [FK_UserMajors_Users_UserId]
+GO
+ALTER TABLE [dbo].[UserRoles]  WITH CHECK ADD  CONSTRAINT [FK_UserRoles_Roles_RoleId] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[Roles] ([RoleId])
+GO
+ALTER TABLE [dbo].[UserRoles] CHECK CONSTRAINT [FK_UserRoles_Roles_RoleId]
+GO
+ALTER TABLE [dbo].[UserRoles]  WITH CHECK ADD  CONSTRAINT [FK_UserRoles_Users_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserId])
+GO
+ALTER TABLE [dbo].[UserRoles] CHECK CONSTRAINT [FK_UserRoles_Users_UserId]
+GO
+USE [master]
+GO
+ALTER DATABASE [InstitueProject] SET  READ_WRITE 
+GO
