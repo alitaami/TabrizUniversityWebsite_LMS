@@ -1,2 +1,2 @@
-# TabrizUniversity_Website_Project
+# TabrizUniversity_Website
  
