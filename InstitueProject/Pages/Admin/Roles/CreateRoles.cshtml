@@ -1,0 +1,90 @@
+﻿@page
+@model InstitueProject.Pages.Admin.Roles.CreateRolesModel
+ 
+@{
+    Layout = "_Layout";
+    List<Institue.DataLayer.Entities.Permission.Permission> permissions = ViewData["Permissions"] as List<Institue.DataLayer.Entities.Permission.Permission>;
+    List<Institue.DataLayer.Entities.User.Role> Roles = ViewData["Roles"] as List<Institue.DataLayer.Entities.User.Role>;
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+    <!-- begin::page loader-->
+    <div class="page-loader">
+        <div class="spinner-border"></div>
+        <span>در حال بارگذاری ...</span>
+    </div>
+    <!-- end::page loader -->
+    <form method="post">
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">افزودن نقش</h5>
+
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">عنوان نقش</label>
+                            <input type="text" asp-for="Role.RoleTitle" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="نقش را وارد کنید">
+
+                        </div>
+
+
+                        <div class="row">
+                            <button type="submit" class="btn btn-primary">ثبت</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">کنترل دسترسی</h5>
+
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <ul>
+                                @foreach (var permission in permissions )
+                                {
+                                    <li>
+                                        <input type="checkbox" name="SelectedPermission" value="@permission.PermissionId" /> @permission.PermissionTitle
+
+                                 
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </form>
+    @section Scripts{
+        <script>
+
+                    $(document).ready(() => {
+                        $('#formControlRange').change(function () {
+                            const file = this.files[0];
+                            console.log(file);
+                            if (file) {
+                                let reader = new FileReader();
+                                reader.onload = function (event) {
+                                    console.log(event.target.result);
+                                    $('#imgAvatar').attr('src', event.target.result);
+                                }
+                                reader.readAsDataURL(file);
+                            }
+                        });
+                    });
+
+        </script>
+
+    }

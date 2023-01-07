@@ -1,0 +1,55 @@
+﻿@page "{id}"
+@model InstitueProject.Pages.Admin.Majors.EditMajorModel
+ 
+
+
+@{
+    Layout = "_Layout";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!-- begin::page loader-->
+<div class="page-loader">
+    <div class="spinner-border"></div>
+    <span>در حال بارگذاری ...</span>
+</div>
+<!-- end::page loader -->
+<form method="post">
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">افزودن رشته</h5>
+
+                    <input hidden asp-for="Major.MajorId" />
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">عنوان رشته</label>
+                        <input type="text" asp-for="Major.MajorTitle" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">شرح</label>
+                        <input type="text" asp-for="Major.description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                    </div>
+                    <div class="checkbox form-group">
+                        <input id="isteacher" type="checkbox" asp-for="Major.IsDelete" />
+                        <label for="exampleInputEmail1">حذف شود؟</label>
+
+
+                    </div>
+
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary">ثبت</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</form>
+

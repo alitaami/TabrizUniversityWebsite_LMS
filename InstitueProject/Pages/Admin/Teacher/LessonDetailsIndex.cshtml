@@ -1,0 +1,73 @@
+﻿@page "{id}"
+@model InstitueProject.Pages.Admin.Teacher.LessonDetailsIndexModel
+@inject Institue.Core.Services.Interface.ILessonService _lesson;
+@{
+    
+
+    Layout = "_Layout";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Institue.Core.Convertors;
+<p>جزئیات درس  </p>
+
+<a asp-page="AddLessonDetail" asp-route-id="@ViewData["LessonId"].ToString()" style="color:aliceblue;" class="btn btn-primary">افزودن جزئیات</a>
+<a asp-page="IndexProjects" asp-route-id="@ViewData["LessonId"].ToString()" style="color:aliceblue;" class="btn btn-primary">پروژه ها</a>
+<a asp-page="IndexPractices" asp-route-id="@ViewData["LessonId"].ToString()" style="color:aliceblue;" class="btn btn-primary">تمرین ها</a>
+
+<div class="card-body">
+    <div class="table-responsive" tabindex="1" style="overflow: hidden; outline: none;">
+        <table class="table">
+            <thead>
+                <tr>
+                    @*<th scope="col">شناسه درس</th>*@
+                    <th scope="col" >عنوان درس</th>
+                    <th scope="col">پیغام استاد</th>
+                    <th scope="col">لینک کلاسی</th>
+                    <th scope="col">شرح لینک </th>
+                    <th scope="col">فایل درسی</th>
+                    <th scope="col"> شرح فایل درسی</th>
+                    <th scope="col">فایل تمرین</th>
+                    <th scope="col">تاریخ انقضا</th>
+                    <th scope="col">شرح تمرین</th>
+                    <th scope="col">فایل پروژه</th>
+                    <th scope="col">تاریخ انقضا</th>
+                    <th scope="col">شرح پروژه</th>
+                    <th scope="col">فایل ویدیو</th>
+                    <th scope="col">شرح ویدیو</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var l in Model.l.Where(m => !m.IsDelete))
+                {
+                    
+                <tr>
+                    @* <td><span style="font-size:8px;">@l.Lesson.LessonId</span></td>*@
+                    <td><span style="font-size:8px;">@l.Lesson.LessonTitle</span></td>
+                    <td><span style="font-size:8px;">@l.LessonAlert</span></td>
+                    <td><span style="font-size:10px;">@l.LessonLink</span></td>
+                    <td><span style="font-size:10px;">@l.LessonLinkDescription</span></td>
+                    <td><span style="font-size:10px;">@l.LessonPdfFile</span></td>
+                    <td><span style="font-size:10px;">@l.LessonPdfFileDescription</span></td>
+                    <td><span style="font-size:8px;">@l.LessonPracticeFile</span></td>
+                    <td><span style="font-size:8px;">@l.LessonPracticeFileExpireDate</span></td>
+                    <td><span style="font-size:8px;">@l.LessonPracticeFileDescription</span></td>
+                    <td><span style="font-size:8px;">@l.LessonProjectFile</span></td>
+                    <td><span style="font-size:8px;">@l.LessonProjectFileExpireDate</span></td>
+                    <td><span style="font-size:8px;">@l.LessonProjectFileDescription</span></td>
+
+                    <td><span style="font-size:10px;">@l.LessonVideoFile</span></td>
+                    <td><span style="font-size:10px;">@l.LessonVideoFileDescription</span></td>
+
+                    <td>
+                        <a href="/Admin/Teacher/EditLessonDetail/@l.LessonDetailId" style=" color:aliceblue;" class="btn btn-sm btn-warning">ویرایش</a>
+
+                    </td>
+                </tr>
+
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>

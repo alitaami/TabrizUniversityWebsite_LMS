@@ -1,0 +1,65 @@
+﻿@inject Institue.Core.Services.Interface.ILessonService _lesson;
+@inject Institue.Core.Services.Interface.IUserService _User;
+@using Institue.Core.Convertors;
+@{
+    List<Institue.DataLayer.Entities.Lesson.UserLesson> Lesson = new List<Institue.DataLayer.Entities.Lesson.UserLesson>();
+    var user = _User.GetUserByUsername(User.Identity.Name);
+    Lesson = _lesson.GetLessonsForUser(User.Identity.Name);
+
+    DateTime miladi = DateTime.Now;
+    var c = miladi.ToShamsi();
+   
+}
+ 
+
+<div class="row">
+    <div class=" col-md-1">
+
+
+    </div>
+    <div class="card col-md-5">
+        <div class="card-header">دروس @user.FirstName @user.LastName</div>
+        @foreach (var l in Lesson)
+        {
+
+
+            <div class="card-body ">
+                <figure>
+                    <img href="#" src="/LessonPics/aesthetic-retro-purple-checkerboard-gingham-checkers-plaid-checkered-wallpaper-perfect-postcard-wallpaper-backdrop-background-banner-your-design_565280-1059.webp" class="img-thumbnail" title="@l.Lesson.LessonTitle">
+                </figure>
+                <a href="/Home/ShowLesson/@l.LessonId" style="  color:dimgrey; font-size:22px; font-style:inherit" class="card-text">@l.Lesson.LessonTitle</a>
+                @*  <a href="#" class="btn btn-primary">بیشتر بخوانید</a>*@
+            </div>
+
+
+
+        }
+
+    </div>
+
+    <div class="col-md-5">
+      
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">فایل های خصوصی</h5>
+
+                <h6  class="card-text">فایلی موجود نیست.</h6>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">رویداد های نزدیک</h5>
+                <h6 class="card-text">رویداد خاصی نزدیک نیست.</h6>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">مدال‌ها</h5>
+
+                <h6   class="card-text">  مدال‌ها در این سایت فعال نشده‌اند.</h6>
+            </div>
+        </div>
+    </div>
+    
+</div>
+ 

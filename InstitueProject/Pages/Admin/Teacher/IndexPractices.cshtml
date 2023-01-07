@@ -1,0 +1,60 @@
+﻿ 
+@page  "{id}"
+@model InstitueProject.Pages.Admin.Teacher.IndexPracticesModel
+@inject Institue.Core.Services.Interface.ILessonService _lesson;
+@inject Institue.Core.Services.Interface.IUserService _user;
+@{
+
+
+
+    Layout = "_Layout";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Institue.Core.Convertors;
+<p>لیست تمرین ها</p>
+<form>
+    @*<div class="row">
+            <input name="filterusername" type="text" class="form-control col-3" placeholder="نام کاربری" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="col-1"></div>
+            <input name="filterEmail" type="text" class="form-control col-3" placeholder="ایمیل" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="col-1"></div>
+            <div>
+                <button type="submit" class="btn btn-primary">جستجو</button>
+                <a asp-page="Index" style="color:aliceblue;" class="btn btn-primary"> ریست کردن جدول</a>
+
+            </div>
+        </div>*@
+</form>
+<div class="card-body">
+    <div class="table-responsive" tabindex="1" style="overflow: hidden; outline: none;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">نام دانشجو</th>
+                    <th scope="col">فایل پروژه</th>
+                    <th scope="col">شرح</th>
+                    <th scope="col">تاریخ آپلود</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var l in Model.lessonProject)
+                {
+                    var firstname = _user.GetUserById(l.UserId).FirstName;
+                    var lastname = _user.GetUserById(l.UserId).LastName;
+                    var name = firstname + " " + lastname;
+
+                    <tr>
+                        <td>@name</td>
+                        <td><a style="color:dimgrey;" title=" @l.LessonPracticeFile " href="/DownloadPROS/@l.LessonPracticeId">@l.LessonPracticeFile</a></td>
+                        <td>@l.LessonPracticeDescription</td>
+                        <td>@l.UploadDate.ToShamsi()</td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>

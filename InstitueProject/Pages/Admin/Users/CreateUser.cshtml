@@ -1,0 +1,253 @@
+﻿@page
+@model TopLearnProject2022.Pages.Admin.Users.CreateUserModel
+@inject Institue.Core.Services.Interface.ILessonService _lesson
+@{
+
+    Layout = "_Layout";
+
+    List<Institue.DataLayer.Entities.User.Role> Roles = ViewData["Roles"] as List<Institue.DataLayer.Entities.User.Role>;
+    List<Institue.DataLayer.Entities.User.Major> Majors = ViewData["Majors"] as List<Institue.DataLayer.Entities.User.Major>;
+    var notfound = ViewData["notfound"];
+    var exist = ViewData["Exists"];
+    var errorfornum = ViewData["errorfornum"];
+}    
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!-- begin::page loader-->
+<div class="page-loader">
+    <div class="spinner-border"></div>
+    <span>در حال بارگذاری ...</span>
+</div>
+
+@if (exist != null)
+{
+    <div class="alert alert-danger" role="alert">
+        !فردی  با این نام و شماره دانشجویی وجود دارد
+    </div>
+}
+
+@if (notfound != null)
+{
+    <div class="alert alert-danger" role="alert">
+        لطفا اطلاعات را کامل وارد کنید
+    </div>
+}@if (errorfornum != null)
+{
+<div class="alert alert-danger" role="alert">
+    شماره ها نمیتوانند بیشتر از 11 رقم باشند  !
+</div>
+}
+
+<!-- end::page loader -->
+<form method="post" enctype="multipart/form-data">
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">افزودن کاربران</h5>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">نام کاربری</label> <span style="color:darkred">*</span>
+                        <input type="text" asp-for="U.Username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                    </div> <div class="form-group">
+                        <label for="exampleInputEmail1">نام</label> <span style="color:darkred">*</span>
+                        <input type="text" asp-for="U.firstname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                    </div> <div class="form-group">
+                        <label for="exampleInputEmail1">نام خانوادگی</label> <span style="color:darkred">*</span>
+                        <input type="text" asp-for="U.Lastname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">ایمیل</label>
+                        <input type="email" asp-for="U.Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">رمز عبور</label> <span style="color:darkred">*</span>
+                        <input type="text" asp-for="U.Password" class="form-control" id="exampleInputEmail1" aria-describedby="textHelp">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">تاریخ تولد</label> <span style="color:darkred">*</span>
+                        <input type="date" asp-for="U.Birthdate" class="form-control" id="exampleInputPassword1">
+                        <p class="help-block " style="color:darkred">mm:ماه dd:روز yyyy:شمسی   سال   </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">شماره تماس</label> <span style="color:darkred">*</span>
+                        <input type="number" asp-for="U.phonenumber" class="form-control" id="myInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">شماره ثابت</label> <span style="color:darkred">*</span>
+                        <input type="number" asp-for="U.homenumber" class="form-control" id="myInput1">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">نشانی منزل</label> <span style="color:darkred">*</span>
+                        <input type="text" asp-for="U.Address" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    @*<div class="form-group">
+                            <label for="exampleInputEmail1">رشته تحصیلی</label> <span style="color:darkred">*</span>
+                            <select class="custom-select mb-3" asp-for="U.MajorId">
+                                @if (Majors != null)
+                                {
+
+
+                                    @foreach (var item in Majors)
+                                    {
+                                        <option value="@item.MajorId">@item.MajorTitle</option>
+
+                                    }}
+                            </select>
+
+                        </div>*@
+
+
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">رشته تحصیلی</label>
+                        <select class="custom-select mb-3" name="SelectedMajors" asp-items="@(ViewData["Majors"] as SelectList)">
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">تاریخ شروع تحصیل/تدریس</label> <span style="color:darkred">*</span>
+                        <input type="date" asp-for="U.UniversitysignDate" class="form-control" id="exampleInputPassword1">
+                        <p class="help-block " style="color:darkred">mm:ماه dd:روز yyyy:شمسی   سال   </p>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">شماره دانشجویی</label> <span style="color:darkred">*</span>
+                        <input type="number"  asp-for="U.studentnumber" class="form-control" id="stnum">
+                    </div>
+
+                    <div class="checkbox form-group">
+                        <input id="isteacher" type="checkbox" asp-for="U.IsTeacher" />
+                        <label for="exampleInputEmail1">استاد است؟</label>
+
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">کد استاد</label>
+                        <input type="number" asp-for="U.Teachernumber" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">مدرک</label> <span style="color:darkred">*</span>
+                        <input type="text" asp-for="U.degree" class="form-control" id="exampleInputPassword1">
+                    </div>
+
+                    <div class="checkbox form-group">
+
+
+                        <input type="checkbox" asp-for="U.IsActive" />
+                        <label for="exampleInputEmail1">فعال</label>
+                    </div>
+
+                    <div class="checkbox form-group">
+                        <input type="checkbox" asp-for="U.IsDelete" />
+                        <label for="exampleInputEmail1">حذف شود؟</label>
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>نقش ها</label> <span style="color:darkred">*</span>
+                        @if (Roles != null)
+                        {
+                            @foreach (var item in Roles.Where(r => !r.IsDelete))
+                            {
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="SelectedRoles" value="@item.RoleId" />  @item.RoleTitle
+                                    </label>
+                                </div>
+                            }}
+                    </div>
+
+                    <div class="row">
+                        <button id="myBtn"    type="submit" class="btn btn-primary">ثبت</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">تصویر آواتار</h5>
+
+                    <div class="form-group">
+                        <img id="imgAvatar" class="img-fluid" src="~/UserAvatar/defaultavatar.jpg" />
+                        <input type="file" name="UserAvatar" id="formControlRange" asp-for="U.UserAvatar">
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <script>
+        $('#isteacher').change(function () {
+            if ($(this).is(':checked'))
+                $('#stnum').prop('disabled', 'disabled')
+        })
+    </script>
+    <script>
+        $('#isteacher').change(function () {
+            if (!this.checked) {
+                location.reload();
+            }
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            // Get value on button click and show alert
+
+            $("#myInput").focusout(function () {
+                var str = $("#myInput").val();
+                var str1 = $("#myInput1").val();
+                if (str.length > 11   ) {
+
+                     
+                    document.getElementById("error").innerHTML +=
+                        "<h3>تعداد ارقام وارد شده نباید بیشتر از 11 باشد</h3>";
+
+                }
+                if ( str1.length > 11) {
+
+                   
+                    document.getElementById("error").innerHTML +=
+                        "<h3>تعداد ارقام وارد شده نباید بیشتر از 11 باشد</h3>";
+
+                }
+            });
+        });
+    </script>
+    <script>
+
+        $(document).ready(() => {
+            $('#formControlRange').change(function () {
+                const file = this.files[0];
+                console.log(file);
+                if (file) {
+                    let reader = new FileReader();
+                    reader.onload = function (event) {
+                        console.log(event.target.result);
+                        $('#imgAvatar').attr('src', event.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+
+    </script>
+
+
+}
+<!-- end::global scripts -->
+<!-- begin::chart -->

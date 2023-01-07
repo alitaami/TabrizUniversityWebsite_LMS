@@ -1,0 +1,174 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Institue.DataLayer.Entities.User 
+@using Institue.DataLayer.Entities.Lesson
+@using Institue.Core.Services.Interface
+@inject IUserService _UserService
+@{
+
+    List<UserLesson> lessons = ViewData["Lessons"] as List<UserLesson>;
+    var major = _UserService.GetMajorByMajorId(User.Identity.Name);
+}
+@model User
+<!-- begin::main content -->
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LMS Tabriz</title>
+
+    <!-- begin::global styles -->
+    <link rel="stylesheet" href="/assets/vendors/bundle.css" type="text/css">
+    <!-- end::global styles -->
+
+    <link rel="stylesheet" href="/assets/vendors/swiper/swiper.min.css">
+
+    <!-- begin::custom styles -->
+    <link rel="stylesheet" href="/assets/css/app.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/custom.css" type="text/css">
+    <!-- end::custom styles -->
+    <!-- begin::favicon -->
+    <link rel="shortcut icon" href="/assets/media/image/favicon.png">
+    <!-- end::favicon -->
+    <!-- begin::theme color -->
+    <meta name="theme-color" content="#3f51b5" />
+    <!-- end::theme color -->
+
+</head>
+<body>
+    <div class="container-fluid">
+
+        <!-- begin::page header -->
+        <div class="page-header">
+            <div>
+
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        @*<li class="breadcrumb-item"><a href="#">داشبورد</a></li>
+                            <li class="breadcrumb-item"><a href="#">صفحات</a></li>*@
+                        <li class="breadcrumb-item active" aria-current="page">پروفایل: @Model.FirstName @Model.LastName</li>
+                    </ol>
+                </nav>
+            </div>
+
+        </div>
+        <!-- end::page header -->
+
+        <div class="row">
+            <div class="col-md-4">
+
+                <div class="card">
+                    <img src="/UserAvatar/@Model.UserAvatarName" class="card-img-top" alt="...">
+                </div>
+
+
+
+            </div>
+            <div class="col-md-8">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title d-flex justify-content-between align-items-center">
+                            اطلاعات
+                            <a asp-area="UserPanel" asp-controller="Home" asp-action="EditProfile" class="btn-sm primary-font">
+                                <i class="ti-pencil m-l-5"></i> ویرایش
+                            </a>
+                        </h5>
+                        <div class="row mb-2">
+                            <div class="col-6 text-muted">نام:</div>
+                            <div class="col-6">@Model.FirstName  @Model.LastName</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6 text-muted">ایمیل:</div>
+                            <div class="col-6">@Model.Email</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6 text-muted">رشته:</div>
+                            <div class="col-6">@major.MajorTitle</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6 text-muted">آدرس:</div>
+                            <div class="col-6">@Model.Address</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6 text-muted">مدرک:</div>
+                            <div class="col-6">@Model.Degree</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6 text-muted">تاریخ تولد:</div>
+                            <div class="col-6">@Model.BirthDate</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6 text-muted">تلفن ثابت:</div>
+                            <div class="col-6">@Model.HomeNumber</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6 text-muted">تلفن همراه:</div>
+                            <div class="col-6">@Model.PhoneNumber</div>
+                        </div>
+                        @if (Model.IsTeacher)
+                        {
+                            <div class="row mb-2">
+                                <div class="col-6 text-muted">کد استاد:</div>
+                                <div class="col-6">@Model.TeacherNumber</div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-6 text-muted">تاریخ شروع تدریس:</div>
+                                <div class="col-6">@Model.UniversitySignDate.Date</div>
+                            </div>
+                        }
+                        else
+                        {
+
+                            <div class="row mb-2">
+                                <div class="col-6 text-muted">شماره دانشجویی:</div>
+                                <div class="col-6">@Model.StudentNumber</div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-6 text-muted">تاریخ شروع تحصیل:</div>
+                                <div class="col-6">@Model.UniversitySignDate.Date </div>
+                            </div>
+                        }
+                        <div class="row mb-2">
+                            <div class="col-6 text-muted">دروس مربوطه:</div>
+                            @foreach (var l in lessons.Where(l => l.Lesson.IsExistOnThisYear))
+                            {
+
+                                <p style="margin:3px;">@l.Lesson.LessonTitle ،</p>
+
+                            }
+                        </div>
+                    </div>
+                    </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- end::main content -->
+    <!-- end::main content -->
+    <!-- begin::global scripts -->
+    <script src="/assets/vendors/bundle.js"></script>
+    <!-- end::global scripts -->
+    <!-- begin::chart -->
+    <script src="/assets/vendors/charts/chart.min.js"></script>
+    <script src="/assets/vendors/charts/sparkline.min.js"></script>
+    <script src="/assets/vendors/circle-progress/circle-progress.min.js"></script>
+    <script src="/assets/js/examples/charts.js"></script>
+    <!-- end::chart -->
+    <!-- begin::swiper -->
+    <script src="/assets/vendors/swiper/swiper.min.js"></script>
+    <script src="/assets/js/examples/swiper.js"></script>
+    <!-- end::swiper -->
+    <!-- begin::custom scripts -->
+    <script src="/assets/js/custom.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <!-- end::custom scripts -->
+
+</body>
+</html>

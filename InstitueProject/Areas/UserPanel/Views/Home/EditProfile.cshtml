@@ -1,0 +1,116 @@
+﻿@model Institue.Core.ViewModels.EditProfileViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+  
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LMS Tabriz</title>
+
+    <!-- begin::global styles -->
+    <link rel="stylesheet" href="/assets/vendors/bundle.css" type="text/css">
+    <!-- end::global styles -->
+
+    <link rel="stylesheet" href="/assets/vendors/swiper/swiper.min.css">
+
+    <!-- begin::custom styles -->
+    <link rel="stylesheet" href="/assets/css/app.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/custom.css" type="text/css">
+    <!-- end::custom styles -->
+    <!-- begin::favicon -->
+    <link rel="shortcut icon" href="/assets/media/image/favicon.png">
+    <!-- end::favicon -->
+    <!-- begin::theme color -->
+    <meta name="theme-color" content="#3f51b5" />
+    <!-- end::theme color -->
+
+</head>
+<body>
+
+    <!-- begin::page loader-->
+    <div class="page-loader">
+        <div class="spinner-border"></div>
+        <span>در حال بارگذاری ...</span>
+    </div>
+    @if (ViewBag.e != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            رمزعبور فعلی صحیح نمیباشد
+        </div>
+    }
+    <!-- end::page loader -->
+    <form method="post" asp-action="EditProfile" enctype="multipart/form-data">
+        <div class="row">
+
+            <div class="col-md-8">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">ویرایش  پروفایل</h5>
+
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">ایمیل</label>
+                            <input type="text" asp-for="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">رمزعبور فعلی</label>
+                            <input type="password" asp-for="OldPassword" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <p class="help-block " style="color:darkred">در صورت نیاز به تغییر،فیلد های مربوطه را پر کنید</p>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">رمزعبور جدید </label>
+                            <input type="password" asp-for="Password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                        </div><div class="form-group">
+                            <label for="exampleInputEmail1">تکرار رمزعبور </label>
+                            <input type="password" asp-for="RePassword" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">تصویر آواتار</h5>
+                                <input type="hidden" asp-for="AvatarName" />
+                                <div class="form-group">
+                                    <img id="imgAvatar" style="width:100px;" class="img-fluid" src="~/UserAvatar/@Model.AvatarName" />
+                                    <input type="file" name="UserAvatar" id="formControlRange" asp-for="UserAvatar">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button type="submit" class="btn btn-primary">ثبت</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+
+    <!-- end::main content -->
+    <!-- end::main content -->
+    <!-- begin::global scripts -->
+    <script src="/assets/vendors/bundle.js"></script>
+    <!-- end::global scripts -->
+    <!-- begin::chart -->
+    <script src="/assets/vendors/charts/chart.min.js"></script>
+    <script src="/assets/vendors/charts/sparkline.min.js"></script>
+    <script src="/assets/vendors/circle-progress/circle-progress.min.js"></script>
+    <script src="/assets/js/examples/charts.js"></script>
+    <!-- end::chart -->
+    <!-- begin::swiper -->
+    <script src="/assets/vendors/swiper/swiper.min.js"></script>
+    <script src="/assets/js/examples/swiper.js"></script>
+    <!-- end::swiper -->
+    <!-- begin::custom scripts -->
+    <script src="/assets/js/custom.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <!-- end::custom scripts -->
+
+</body>
+</html>

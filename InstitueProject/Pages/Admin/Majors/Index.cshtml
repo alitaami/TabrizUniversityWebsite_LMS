@@ -1,0 +1,45 @@
+﻿@page
+@model InstitueProject.Pages.Admin.Majors.IndexModel
+ 
+@{
+
+    Layout = "_Layout";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Institue.Core.Convertors;
+<p>لیست رشته ها</p>
+ 
+    
+<div class="card-body">
+    <div class="table-responsive" tabindex="1" style="overflow: hidden; outline: none;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">شناسه رشته</th>
+                    <th scope="col">عنوان رشته</th>
+                    <th scope="col">دستورات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var m in Model.Major.Where(m=>!m.IsDelete))
+                {
+
+                <tr>
+                    <td>@m.MajorId</td>
+
+                    <td>@m.MajorTitle</td>
+
+
+                    <td>
+                        <a href="/Admin/majors/EditMajor/@m.MajorId" style="color:aliceblue;" class="btn btn-warning">ویرایش</a>
+ 
+                    </td>
+                </tr>
+
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>

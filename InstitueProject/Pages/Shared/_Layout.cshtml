@@ -1,0 +1,199 @@
+﻿@using Institue.Core.Services.Interface
+@inject IUserService _UserService
+@{
+    ViewData["Title"] = "LMS Tabriz";
+    var user = _UserService.GetInfoByUsername(User.Identity.Name);
+}
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LMS Tabriz</title>
+
+    <!-- begin::global styles -->
+    <link rel="stylesheet" href="/assets/vendors/bundle.css" type="text/css">
+    <!-- end::global styles -->
+
+    <link rel="stylesheet" href="/assets/vendors/swiper/swiper.min.css">
+
+    <!-- begin::custom styles -->
+    <link rel="stylesheet" href="/assets/css/app.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/custom.css" type="text/css">
+    <!-- end::custom styles -->
+    <!-- begin::favicon -->
+    <link rel="shortcut icon" href="/assets/media/image/favicon.png">
+    <!-- end::favicon -->
+    <!-- begin::theme color -->
+    <meta name="theme-color" content="#3f51b5" />
+    <!-- end::theme color -->
+
+    
+</head>
+<body>
+
+    <!-- begin::page loader-->
+    <div class="page-loader">
+        <div class="spinner-border"></div>
+        <span>در حال بارگذاری ...</span>
+    </div>
+    <!-- end::page loader -->
+    <!-- begin::sidebar -->
+    <!-- end::sidebar -->
+    <!-- begin::side menu -->
+    <div class="side-menu">
+        <div class="side-menu-body">
+            <ul>
+ @if (!user.IsTeacher)
+ {
+                <li>
+                    <a href=""><i class="icon ti-panel"></i> <span>پنل ادمین</span> </a>
+                    <ul>
+                         <li><a href="/Admin/Users/index">دانشجویان </a></li>
+                        <li><a href="/Admin/Users/IndexTeacher">اساتید </a></li>
+                        <li><a href="/Admin/Users/CreateUser">افزودن کاربران </a></li>
+                        <li><a href="/Admin/Users/ListDeleteUsers">  کاربران حذف شده </a></li>
+                        <li><a href="/Admin/Roles/index">  نقش ها</a></li>
+                        <li><a href="/Admin/Roles/CreateRoles"> افزودن نقش </a></li>
+                        <li><a href="/Admin/Lessons/Index">  دروس  </a></li>
+                        <li><a href="/Admin/Lessons/CreateLesson"> افزودن درس </a></li>
+                        <li><a href="/Admin/Majors/Index">  رشته های تحصیلی  </a></li>
+                        <li><a href="/Admin/Majors/CreateMajor"> افزودن رشته تحصیلی </a></li>
+
+                    </ul>
+                </li>
+ }
+            else
+            {
+
+
+
+                <li>
+                    <a href=""><i class="icon ti-user"></i> <span>پنل استاد</span> </a>
+                    <ul>
+                         <li><a href="/Admin/Teacher/index">دروس مربوطه</a></li>
+                      </ul>
+                </li>
+
+ }
+            </ul>
+        </div>
+    </div>
+    <!-- end::side menu -->
+    <!-- begin::navbar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+
+            <div class="header-logo">
+                <a href="#">
+                    <img src="/Logos/آرم دانشگاه تبریز.png" alt="...">
+                    <span class="logo-text d-none d-lg-block">سامانه آموزش مجازی دانشگاه تبریز</span>
+                </a>
+            </div>
+
+            <div class="header-body">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown d-none d-lg-block">
+                        @*<a href="#" class="nav-link" data-toggle="dropdown">
+                                <i class="fa fa-th-large"></i>
+                            </a>*@
+                        <div class="dropdown-menu dropdown-menu-nav-grid">
+                            <div class="dropdown-menu-title">منوی سریع</div>
+                            <div class="dropdown-menu-body">
+                                <div class="nav-grid">
+                                    <div class="nav-grid-row">
+                                        <a href="#" class="nav-grid-item">
+                                            <i class="fa fa-address-book-o"></i>
+                                            <span>نرم افزار</span>
+                                        </a>
+                                        <a href="#" class="nav-grid-item">
+                                            <i class="fa fa-envelope-o"></i>
+                                            <span>ایمیل</span>
+                                        </a>
+                                    </div>
+                                    <div class="nav-grid-row">
+                                        <a href="#" class="nav-grid-item">
+                                            <i class="fa fa-sticky-note"></i>
+                                            <span>گفتگو</span>
+                                        </a>
+                                        <a href="#" class="nav-grid-item">
+                                            <i class="fa fa-dashboard"></i>
+                                            <span>داشبورد</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav">
+                    @*<li class="nav-item">
+                        <a href="#" class="d-lg-none d-sm-block nav-link search-panel-open">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </li>*@
+                    <li class="nav-item">
+
+                    <li class="nav-item dropdown">
+                        <a href="#" data-toggle="dropdown">
+                            <figure class="avatar avatar-sm avatar-state-success">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <img class="rounded-circle" src="/UserAvatar/@user.UserAvatarName" alt="...">
+                                }
+                            </figure>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a  asp-area="UserPanel" asp-controller="Home" asp-action="Index"  class="dropdown-item">پروفایل</a>
+                        
+                            <div class="dropdown-divider"></div>
+                            <a asp-controller="Account" asp-action="Logout" class="text-danger dropdown-item">خروج</a>
+                        </div>
+                    </li>
+                    <li class="nav-item d-lg-none d-sm-block">
+                        <a href="#" class="nav-link side-menu-open">
+                            <i class="ti-menu"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+    <!-- end::navbar -->
+    <!-- begin::main content -->
+
+
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+
+
+   
+
+    <!-- end::main content -->
+    <!-- begin::global scripts -->
+    <!-- begin::global scripts -->
+    <script src="/assets/vendors/bundle.js"></script>
+    <!-- end::global scripts -->
+    <!-- begin::chart -->
+    <script src="/assets/vendors/charts/chart.min.js"></script>
+    <script src="/assets/vendors/charts/sparkline.min.js"></script>
+    <script src="/assets/vendors/circle-progress/circle-progress.min.js"></script>
+    <script src="/assets/js/examples/charts.js"></script>
+    <!-- end::chart -->
+    <!-- begin::swiper -->
+    <script src="/assets/vendors/swiper/swiper.min.js"></script>
+    <script src="/assets/js/examples/swiper.js"></script>
+    <!-- end::swiper -->
+    <!-- begin::custom scripts -->
+    <script src="/assets/js/custom.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <!-- end::custom scripts -->
+    <!-- end::custom scripts -->
+    @RenderSection("Scripts", false)
+</body>
+</html>

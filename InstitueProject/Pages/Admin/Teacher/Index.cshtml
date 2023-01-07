@@ -1,0 +1,57 @@
+﻿@page 
+@model InstitueProject.Pages.Admin.Teacher.IndexModel
+ 
+ 
+@inject Institue.Core.Services.Interface.IUserService _user;
+@{
+   var u =  _user.GetUserByUsername(User.Identity.Name);
+    int userid = u.UserId;
+    var user = _user.GetUserById(userid);
+    Layout = "_Layout";
+
+
+    var user1 = user.FirstName + " " + user.LastName;
+    if (user.IsTeacher)
+    {
+        var teacher = "استاد";
+        user1 = teacher + " " + user.FirstName + " " + user.LastName;
+    }
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Institue.Core.Convertors;
+<p>لیست دروس : @user1 </p>
+
+
+<div class="card-body">
+    <div class="table-responsive" tabindex="1" style="overflow: hidden; outline: none;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">شناسه درس</th>
+                    <th scope="col">عنوان درس</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var i in Model.UserLesson)
+                {
+
+                <tr>
+                    <td>@i.LessonId</td>
+                    <td>@i.Lesson.LessonTitle</td>
+
+                    <td>
+                        <a href="/Admin/Teacher/LessonDetailsIndex/@i.LessonId" style="color:aliceblue;" class="btn btn-sm btn-warning">جزئیات درس</a>
+                        
+                    </td>
+
+                </tr>
+
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>

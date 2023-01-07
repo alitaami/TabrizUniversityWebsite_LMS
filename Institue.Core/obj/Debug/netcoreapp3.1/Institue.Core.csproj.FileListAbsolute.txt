@@ -1,0 +1,16 @@
+C:\Users\Sarv\source\repos\InstitueProject\Institue.Core\bin\Debug\netcoreapp3.1\Institue.Core.deps.json
+C:\Users\Sarv\source\repos\InstitueProject\Institue.Core\bin\Debug\netcoreapp3.1\Institue.Core.runtimeconfig.json
+C:\Users\Sarv\source\repos\InstitueProject\Institue.Core\bin\Debug\netcoreapp3.1\Institue.Core.runtimeconfig.dev.json
+C:\Users\Sarv\source\repos\InstitueProject\Institue.Core\bin\Debug\netcoreapp3.1\Institue.Core.dll
+C:\Users\Sarv\source\repos\InstitueProject\Institue.Core\bin\Debug\netcoreapp3.1\Institue.Core.pdb
+C:\Users\Sarv\source\repos\InstitueProject\Institue.Core\bin\Debug\netcoreapp3.1\Institue.DataLayer.dll
+C:\Users\Sarv\source\repos\InstitueProject\Institue.Core\bin\Debug\netcoreapp3.1\Institue.DataLayer.pdb
+C:\Users\Sarv\source\repos\InstitueProject\Institue.Core\obj\Debug\netcoreapp3.1\Institue.Core.csproj.AssemblyReference.cache
+C:\Users\Sarv\source\repos\InstitueProject\Institue.Core\obj\Debug\netcoreapp3.1\Institue.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Sarv\source\repos\InstitueProject\Institue.Core\obj\Debug\netcoreapp3.1\Institue.Core.AssemblyInfoInputs.cache
+C:\Users\Sarv\source\repos\InstitueProject\Institue.Core\obj\Debug\netcoreapp3.1\Institue.Core.AssemblyInfo.cs
+C:\Users\Sarv\source\repos\InstitueProject\Institue.Core\obj\Debug\netcoreapp3.1\Institue.Core.csproj.CoreCompileInputs.cache
+C:\Users\Sarv\source\repos\InstitueProject\Institue.Core\obj\Debug\netcoreapp3.1\Institue.Core.csproj.CopyComplete
+C:\Users\Sarv\source\repos\InstitueProject\Institue.Core\obj\Debug\netcoreapp3.1\Institue.Core.dll
+C:\Users\Sarv\source\repos\InstitueProject\Institue.Core\obj\Debug\netcoreapp3.1\Institue.Core.pdb
+C:\Users\Sarv\source\repos\InstitueProject\Institue.Core\obj\Debug\netcoreapp3.1\Institue.Core.genruntimeconfig.cache

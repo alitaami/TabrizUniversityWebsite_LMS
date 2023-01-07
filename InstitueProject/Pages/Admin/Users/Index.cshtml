@@ -1,0 +1,119 @@
+﻿@page
+@model InstitueProject.Pages.Admin.Users.IndexModel
+@{
+    Layout = "_Layout";
+
+
+}
+@using Institue.Core.Convertors;
+@inject Institue.Core.Services.Interface.IUserService _user
+ 
+
+<p>لیست کاربران</p>
+<form>
+    <div class="row">
+        <input name="lastname" type="text" class="form-control col-3" placeholder="نام خانوادگی" style="margin:5px;" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <div class="col-1"></div>
+        <input name="StNumber" type="text" class="form-control col-3" placeholder="شماره دانشجویی" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <div class="col-1"></div>
+        <div>
+            <button type="submit" class="btn btn-primary">جستجو</button>
+            <a asp-page="Index" style="color:aliceblue;" class="btn btn-primary"> ریست کردن جدول</a>
+
+        </div>
+    </div>
+</form>
+<div class="card-body">
+    <div class="table-responsive" tabindex="1" style=" overflow: hidden; outline: none;">
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th scope="col">نام </th>
+                    <th scope="col">نام کاربری</th>
+                    <th scope="col">ایمیل</th>
+                    <th scope="col">تاریخ تولد</th>
+                    <th scope="col">تلفن همراه</th>
+                    <th scope="col">تلفن ثابت</th>
+                    <th scope="col">نشانی</th>
+                    <th scope="col">رشته تحصیلی</th>
+                    <th scope="col">تاریخ ورود</th>
+                    <th scope="col">شماره دانشجویی</th>
+                    <th scope="col">دوره</th>
+                    @* <th scope="col">تصویر کاربری</th>*@
+                    <th scope="col">وضعیت</th>
+                    @*  <th scope="col">تاریخ ثبت نام</th>*@
+                    <th scope="col">دستورات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.user.Users.Where(i => i.IsDelete == false && i.IsTeacher == false))
+                {
+                    var x = _user.GetMajorName(user.UserId);
+
+                    <tr>
+                        <td><span style="font-size:10px;">@user.FirstName @user.LastName </span></td>
+                        <td><span style="font-size:10px;">@user.UserName</span></td>
+                        <td><span style="font-size:10px;">@user.Email</span></td>
+                        <td><span style="font-size:10px;">@user.BirthDate </span> </td>
+                        <td><span style="font-size:10px;">@user.PhoneNumber</span> </td>
+                        <td><span style="font-size:10px;">@user.HomeNumber</span> </td>
+                        <td><span style="font-size:9px;">@user.Address </span></td>
+                        <td>
+                            <span style="font-size:10px;">
+                                @if (x != null)
+                                {
+                                    @x.MajorTitle
+
+                                }
+                               
+                               else {
+ 
+
+                                }
+                            </span>
+                        </td>
+                        <td><span style="font-size:10px;">@user.UniversitySignDate</span></td>
+                        <td><span style="font-size:10px;">@user.StudentNumber</span></td>
+                        <td><span style="font-size:10px;">@user.Degree</span></td>
+                        @* <td><span href="~/UserAvatar/@user.UserAvatar"></span></td>*@
+                        <td>
+                            @if (user.IsActive)
+                            {
+                                <p class="text-success  ">فعال</p>
+                            }
+                            else
+                            {
+                                <p class="text-danger ">غیرفعال</p>
+
+                            }
+                        </td>
+                        @*<td>@user.RegistersDate.ToShamsi() </td>*@
+                        <td>
+                            <a href="/Admin/Users/EditUser/@user.UserId" style="color:aliceblue;" class="btn btn-sm btn-warning">ویرایش</a>
+                            <a href="/Admin/Users/IndexUserLesson/@user.UserId" style="color:aliceblue;" class="btn btn-danger">درس ها</a>
+
+                        </td>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<div class="row">
+    <nav aria-label="..." class="mb-3">
+        <ul class="pagination pagination-sm">
+            @for (int i = 1; i <= Model.user.PageCount; i++)
+            {
+                <li class="page-item @((i==Model.user.CurrentPage)?"active":"")">
+                    <a class="page-link" href="/Admin/Users?PageId=@i">@i</a>
+                </li>
+            }
+
+
+        </ul>
+    </nav>
+</div>
+ 

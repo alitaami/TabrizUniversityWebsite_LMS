@@ -1,0 +1,53 @@
+﻿@page "{id}"
+@model InstitueProject.Pages.Admin.Users.CreateUserLessonModel
+@inject Institue.Core.Services.Interface.IUserService _user;
+@inject Institue.Core.Services.Interface.ILessonService _lesson;
+
+@{
+
+    List<Institue.DataLayer.Entities.Lesson.LessonMajors> Lessons = ViewData["Lessons"] as List<Institue.DataLayer.Entities.Lesson.LessonMajors>;
+
+    var user = _user.GetUserById(Model.UserLesson.UserId);
+    List<int> UsL = _lesson.UserLessons(user.UserId);
+
+    var user1 = user.FirstName + " " + user.LastName;
+    if (user.IsTeacher)
+    {
+        var teacher = "استاد";
+        user1 = teacher + " " + user.FirstName + " " + user.LastName;
+    }
+}
+<form method="post" enctype="multipart/form-data">
+    <div class="row">
+
+        <div class="col-md-6">
+            <input hidden asp-for="UserLesson.UserId" />
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">مدیریت دروس : @user1</h5>
+
+
+                    <div class="form-group">
+                        <label>درس ها</label> <span style="color:darkred">*</span>
+                        @if (Lessons != null)
+                        {
+                            @foreach (var item in Lessons.Where(l => l.Lesson.IsExistOnThisYear && !l.Lesson.IsDelete))
+                            {
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="Selectedlesson" value="@item.LessonId" @((UsL.Any(u=> u ==item.LessonId)? "checked" : ""))/>  @item.Lesson.LessonTitle
+                                    </label>
+                                </div>
+                            }}
+                    </div>
+
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary">ثبت</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</form>

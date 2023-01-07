@@ -1,0 +1,100 @@
+﻿@model Institue.DataLayer.Entities.Lesson.LessonPractice
+@inject Institue.Core.Services.Interface.ILessonService _lesson;
+@inject Institue.Core.Services.Interface.IUserService _user;
+
+@using Institue.Core.Convertors;
+@{
+    List<Institue.DataLayer.Entities.Lesson.LessonDetail> lesson = ViewData["Lesson"] as List<Institue.DataLayer.Entities.Lesson.LessonDetail>;
+    List<Institue.DataLayer.Entities.Lesson.LessonPractice> LessonPractice = ViewData["LessonPractice"] as List<Institue.DataLayer.Entities.Lesson.LessonPractice>;
+
+    int userid = _user.GetUserByUsername(User.Identity.Name).UserId;
+    DateTime miladi = DateTime.Now;
+    var c = miladi.ToShamsi();
+    DateTime d = DateTime.Parse(c);
+
+    ViewData["Title"] = " تمرین";
+}
+
+<div class="card">
+    <div class="card-body">
+
+
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title"></h5>
+
+        @foreach (var l in lesson)
+        {
+
+            if (l.LessonPracticeFileExpireDate != null)
+            {
+
+                @if (d < l.LessonPracticeFileExpireDate)
+                {
+                    if (!_lesson.CheckStudentPracticeUpload(userid, l.LessonDetailId))
+                    {
+                        <p>  <img src="https://lms.tabrizu.ac.ir/theme/image.php/egkuro/assign/1663587418/icon" class="iconlarge activityicon" alt="" role="presentation" aria-hidden="true"><a style="color:dimgrey;" title=" @l.LessonPracticeFileDescription  " href="/DownloadPractice/@l.LessonDetailId"> @l.LessonPracticeFileDescription</a><span style=" margin:10px; color:darkred ">     تاریخ انقضا : @l.LessonPracticeFileExpireDate </span> </p>
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="card">
+                                <div class="card-body">
+                                    <input asp-for="LessonDetailId" hidden />
+                                    <h5 class="card-title"></h5>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"></label>
+                                        <input type="file" name="lessonpractice" id="demoUp" aria-describedby="emailHelp">
+
+                                    </div>
+                                    <p class="help-block">فایل تمرین را آپلود کنید</p>
+                                    <div class="row">
+                                        <button onclick="Reload()" type="submit" class="btn btn-primary">ثبت</button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </form>
+                    }
+                    else
+                    {
+                        <p><img src="https://lms.tabrizu.ac.ir/theme/image.php/egkuro/assign/1663587418/icon" class="iconlarge activityicon" alt="" role="presentation" aria-hidden="true"><a style="color:dimgrey;" title=" @l.LessonPracticeFileDescription " href="/DownloadProject/@l.LessonDetailId">  @l.LessonPracticeFileDescription</a><span style=" margin:10px; color:darkred ">      تاریخ انقضا :  @l.LessonPracticeFileExpireDate </span></p>
+                        @*<p><span style=" justify-content:center; margin:10px; color:darkred ">تمرین را ارسال کرده اید!</span></p>*@
+
+
+                        <div class="card-body">
+                            <h5 class="card-title">فایل تمرین ارسالی  : </h5>
+
+                            @if (LessonPractice != null)
+                            {
+                                @foreach (var lp in LessonPractice)
+                                {
+                        <p><img src="https://lms.tabrizu.ac.ir/theme/image.php/egkuro/assign/1663587418/icon" class="iconlarge activityicon" alt="" role="presentation" aria-hidden="true"><a style="color:dimgrey;" title=" @lp.LessonPracticeFile " href="/DownloadPROS/@lp.LessonPracticeId">  @lp.LessonPracticeFile</a><span style=" margin:10px;  ">   تاریخ آپلود :  @lp.UploadDate.ToShamsi()   </span>  </p>
+
+
+                                }}
+                        </div>
+
+                    }
+                }
+                else
+                { <p>  <img src="https://lms.tabrizu.ac.ir/theme/image.php/egkuro/assign/1663587418/icon" class="iconlarge activityicon" alt="" role="presentation" aria-hidden="true"><a style="color:dimgrey;" title=" @l.LessonPracticeFileDescription  " href="/DownloadPractice/@l.LessonDetailId"> @l.LessonPracticeFileDescription</a><span style=" margin:10px; color:darkred ">     تاریخ انقضا : @l.LessonPracticeFileExpireDate </span> </p>
+                <p><span style=" margin:10px; color:darkred ">زمان ارسال تکلیف به پایان رسیده است</span></p>
+
+
+            }
+            }
+        }
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function Reload() {
+
+            location.reload();
+
+        });
+    </script>
+
+}

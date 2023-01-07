@@ -1,0 +1,135 @@
+﻿
+@page "{id}"
+@model InstitueProject.Pages.Admin.Teacher.EditLessonDetail
+
+@{
+
+    Layout = "_Layout";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<!-- begin::page loader-->
+<div class="page-loader">
+    <div class="spinner-border"></div>
+    <span>در حال بارگذاری ...</span>
+</div>
+<!-- end::page loader -->
+<form method="post" enctype="multipart/form-data">
+    <div class="row">
+
+        <div class="col-md-8">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">افزودن اطلاعات درس</h5>
+                    <input hidden asp-for="l.LessonDetailId" />
+                    <input hidden asp-for="l.UserId" />
+                    <input hidden asp-for="l.LessonPdfFile" />
+                    <input hidden asp-for="l.LessonVideoFile" />
+                    <input hidden asp-for="l.LessonPracticeFile" />
+                    <input hidden asp-for="l.LessonProjectFile" />
+                    <input hidden asp-for="l.LessonId" />
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">عنوان پیغام</label>
+                        <input type="text" asp-for="l.LessonAlert" class="form-control" id="exampleInputEmail1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">لینک کلاسی</label>
+                        <input type="text" asp-for="l.LessonLink" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">شرح لینک</label>
+                        <textarea class="form-control" asp-for="l.LessonLinkDescription">
+                            </textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"></label>
+                        <input type="file" name="lessonpdf" id="demoUp" aria-describedby="emailHelp">
+
+                    </div>
+                    <p class="help-block">فایل درسی را وارد کنید</p>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">شرح فایل درسی</label>
+                        <textarea class="form-control" asp-for="l.LessonPdfFileDescription">
+                            </textarea>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"></label>
+                        <input type="file" name="lessonpractice" id="demoUp" aria-describedby="emailHelp">
+
+                    </div>
+
+                    <p class="help-block">فایل تمرین را وارد کنید</p>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">تاریخ انقضای تمرین</label> <span style="color:darkred">*</span>
+                        <input type="date" asp-for="l.LessonPracticeFileExpireDate " class="form-control" id="exampleInputPassword1">
+                        <p class="help-block " style="color:darkred">mm:ماه dd:روز yyyy:شمسی   سال   </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">شرح فایل تمرین</label>
+                        <textarea class="form-control" asp-for="l.LessonPracticeFileDescription">
+                            </textarea>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"></label>
+                        <input type="file" name="lessonproject" id="demoUp" aria-describedby="emailHelp">
+
+                    </div>
+                    <p class="help-block">فایل پروژه را وارد کنید</p>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">تاریخ انقضای پروژه</label> <span style="color:darkred">*</span>
+                        <input type="date" asp-for="l.LessonProjectFileExpireDate " class="form-control" id="exampleInputPassword1">
+                        <p class="help-block " style="color:darkred">mm:ماه dd:روز yyyy:شمسی   سال   </p>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">شرح فایل پروژه</label>
+                        <textarea class="form-control" asp-for="l.LessonProjectFileDescription">
+                            </textarea>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"></label>
+                        <input type="file" name="lessonvideo" id="demoUp" aria-describedby="emailHelp">
+
+                    </div>
+                    <p class="help-block">فایل ویدیویی را وارد کنید</p>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">شرح فایل ویدیویی</label>
+                        <textarea class="form-control" asp-for="l.LessonVideoFileDescription">
+                            </textarea>
+                    </div>
+
+                    <div class="checkbox form-group">
+                        <input id="isteacher" type="checkbox" asp-for="l.IsDelete" />
+                        <label for="exampleInputEmail1"> حذف شود؟</label>
+
+
+                    </div>
+
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary">ثبت</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+</form>
+
+

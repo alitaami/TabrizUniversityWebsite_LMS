@@ -1,0 +1,72 @@
+﻿@model Institue.DataLayer.Entities.Lesson.LessonDetail
+@inject Institue.Core.Services.Interface.ILessonService _lesson;
+@{ List<Institue.DataLayer.Entities.Lesson.LessonDetail> lesson = ViewData["Lesson"] as List<Institue.DataLayer.Entities.Lesson.LessonDetail>;
+
+    ViewData["Title"] = "نمایش درس";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">اعلانات</h5><span class="message-item"></span>
+
+        @foreach (var l in lesson.Where(l => l.LessonAlert != null))
+        {
+
+            <img src="https://lms.tabrizu.ac.ir/theme/image.php/egkuro/forum/1663587418/icon" class="iconlarge activityicon" alt="" role="presentation" aria-hidden="true"><span>  @l.LessonAlert</span>
+
+        }
+
+    </div>
+</div><div class="card">
+    <div class="card-body">
+        <h5 class="card-title">جلسه های مجازی</h5>
+
+        @foreach (var l in lesson.Where(l => l.LessonLink != null && l.LessonLinkDescription != null))
+        {
+
+            <p><img src="https://lms.tabrizu.ac.ir/theme/image.php/egkuro/adobeconnect/1663587418/icon" class="iconlarge activityicon" alt="" role="presentation" aria-hidden="true"><a style="color:dimgrey;" href="@l.LessonLink" title="برای شرکت در @l.LessonLinkDescription کلیک کنید">  @l.LessonLinkDescription</a></p>
+
+        }
+
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">اسلاید ها</h5>
+        @foreach (var l in lesson.Where(l => l.LessonPdfFile != null && l.LessonPdfFileDescription != null))
+        {
+
+            <p>  <img src="https://lms.tabrizu.ac.ir/theme/image.php/egkuro/core/1663587418/f/pdf-24" class="iconlarge activityicon" alt="" role="presentation" aria-hidden="true"> <a style="color:dimgrey;" title="برای دانلود @l.LessonPdfFileDescription کلیک کنید" href="/DownloadFile/@l.LessonDetailId">  @l.LessonPdfFileDescription</a></p>
+        }
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">اسلاید ها</h5>
+        @foreach (var l in lesson.Where(l => l.LessonVideoFile != null && l.LessonVideoFileDescription != null))
+        {
+
+            <p>  <img src="https://lms.tabrizu.ac.ir/theme/image.php/egkuro/core/1663587418/f/mpeg-24" class="iconlarge activityicon" alt="" role="presentation" aria-hidden="true"><a style="color:dimgrey;" title="برای دانلود @l.LessonVideoFileDescription کلیک کنید" href="/DownloadVideo/@l.LessonDetailId">  @l.LessonVideoFileDescription</a></p>
+        }
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">تمرین ها</h5>
+        @foreach (var l in lesson.Where(l => l.LessonPracticeFile != null && l.LessonPracticeFileDescription != null))
+        {
+
+            <p>  <img src="https://lms.tabrizu.ac.ir/theme/image.php/egkuro/assign/1663587418/icon" class="iconlarge activityicon" alt="" role="presentation" aria-hidden="true"><a style="color:dimgrey;" title=" @l.LessonPracticeFileDescription  " href="/Home/SendPractice/@l.LessonDetailId">  @l.LessonPracticeFileDescription</a></p>
+        }
+    </div>
+</div><div class="card">
+    <div class="card-body">
+        <h5 class="card-title">پروژه ها</h5>
+        @foreach (var l in lesson.Where(l => l.LessonProjectFile != null && l.LessonProjectFileDescription != null))
+        {
+
+            <p><img src="https://lms.tabrizu.ac.ir/theme/image.php/egkuro/assign/1663587418/icon" class="iconlarge activityicon" alt="" role="presentation" aria-hidden="true"><a style="color:dimgrey;" title=" @l.LessonProjectFileDescription " href="/Home/SendProject/@l.LessonDetailId">  @l.LessonProjectFileDescription</a></p>
+        }
+    </div>
+</div>

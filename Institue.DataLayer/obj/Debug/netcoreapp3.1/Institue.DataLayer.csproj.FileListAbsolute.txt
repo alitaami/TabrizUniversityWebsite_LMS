@@ -1,0 +1,13 @@
+C:\Users\Sarv\source\repos\InstitueProject\Institue.DataLayer\bin\Debug\netcoreapp3.1\Institue.DataLayer.deps.json
+C:\Users\Sarv\source\repos\InstitueProject\Institue.DataLayer\bin\Debug\netcoreapp3.1\Institue.DataLayer.runtimeconfig.json
+C:\Users\Sarv\source\repos\InstitueProject\Institue.DataLayer\bin\Debug\netcoreapp3.1\Institue.DataLayer.runtimeconfig.dev.json
+C:\Users\Sarv\source\repos\InstitueProject\Institue.DataLayer\bin\Debug\netcoreapp3.1\Institue.DataLayer.dll
+C:\Users\Sarv\source\repos\InstitueProject\Institue.DataLayer\bin\Debug\netcoreapp3.1\Institue.DataLayer.pdb
+C:\Users\Sarv\source\repos\InstitueProject\Institue.DataLayer\obj\Debug\netcoreapp3.1\Institue.DataLayer.csproj.AssemblyReference.cache
+C:\Users\Sarv\source\repos\InstitueProject\Institue.DataLayer\obj\Debug\netcoreapp3.1\Institue.DataLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Sarv\source\repos\InstitueProject\Institue.DataLayer\obj\Debug\netcoreapp3.1\Institue.DataLayer.AssemblyInfoInputs.cache
+C:\Users\Sarv\source\repos\InstitueProject\Institue.DataLayer\obj\Debug\netcoreapp3.1\Institue.DataLayer.AssemblyInfo.cs
+C:\Users\Sarv\source\repos\InstitueProject\Institue.DataLayer\obj\Debug\netcoreapp3.1\Institue.DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\Sarv\source\repos\InstitueProject\Institue.DataLayer\obj\Debug\netcoreapp3.1\Institue.DataLayer.dll
+C:\Users\Sarv\source\repos\InstitueProject\Institue.DataLayer\obj\Debug\netcoreapp3.1\Institue.DataLayer.pdb
+C:\Users\Sarv\source\repos\InstitueProject\Institue.DataLayer\obj\Debug\netcoreapp3.1\Institue.DataLayer.genruntimeconfig.cache

@@ -1,0 +1,220 @@
+﻿@page "{id}"
+@model InstitueProject.Pages.Admin.Users.EditUserModel
+ 
+@{
+
+    Layout = "_Layout";
+    List<Institue.DataLayer.Entities.User.Role> Roles = ViewData["Roles"] as List<Institue.DataLayer.Entities.User.Role>;
+     var notfound = ViewData["notfound"];
+    var exist = ViewData["Exists"];
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+ 
+    <!-- begin::page loader-->
+    <div class="page-loader">
+        <div class="spinner-border"></div>
+        <span>در حال بارگذاری ...</span>
+    </div>
+
+    @if (exist != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            !فردی  با این نام و شماره دانشجویی وجود دارد
+        </div>
+    }
+
+    @if (notfound != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            لطفا اطلاعات را کامل وارد کنید
+        </div>
+    }
+    <!-- end::page loader -->
+    <form method="post" enctype="multipart/form-data">
+        <div class="row">
+
+            <div class="col-md-6">
+                <input hidden asp-for="EditUserViewModel.UserID" />
+                <input hidden asp-for="EditUserViewModel.UserAvatarName" />
+ 
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">افزودن کاربران</h5>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">نام کاربری</label> <span style="color:darkred">*</span>
+                            <input type="text" asp-for="EditUserViewModel.Username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                        </div> <div class="form-group">
+                            <label for="exampleInputEmail1">نام</label> <span style="color:darkred">*</span>
+                            <input type="text" asp-for="EditUserViewModel.firstname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                        </div> <div class="form-group">
+                            <label for="exampleInputEmail1">نام خانوادگی</label> <span style="color:darkred">*</span>
+                            <input type="text" asp-for="EditUserViewModel.Lastname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">ایمیل</label>
+                            <input type="email" asp-for="EditUserViewModel.Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">رمز عبور</label>
+                            <input type="text" asp-for="EditUserViewModel.Password" class="form-control" id="exampleInputEmail1" aria-describedby="textHelp">
+                            <p class="help-block" style="color:darkred">فقط در صورت لزوم  برای تغییر،رمز جدید را وارد کنید</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">تاریخ تولد</label> <span style="color:darkred">*</span>
+                            <input type="date" asp-for="EditUserViewModel.Birthdate" class="form-control" id="exampleInputPassword1">
+                            <p class="help-block " style="color:darkred">mm:ماه dd:روز yyyy:شمسی   سال   </p>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">شماره تماس</label> <span style="color:darkred">*</span>
+                            <input type="number" asp-for="EditUserViewModel.phonenumber" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">شماره ثابت</label> <span style="color:darkred">*</span>
+                            <input type="number" asp-for="EditUserViewModel.homenumber" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">نشانی منزل</label> <span style="color:darkred">*</span>
+                            <input type="text" asp-for="EditUserViewModel.Address" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        @*<div class="form-group">
+                    <label for="exampleInputEmail1">رشته تحصیلی</label> <span style="color:darkred">*</span>
+                    <select class="custom-select mb-3" asp-for="U.MajorId">
+                        @if (Majors != null)
+                        {
+
+
+                            @foreach (var item in Majors)
+                            {
+                                <option value="@item.MajorId">@item.MajorTitle</option>
+
+                            }}
+                    </select>
+
+                </div>*@
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">رشته تحصیلی</label>
+                            <select class="custom-select mb-3"  name="SelectedMajors"  asp-items="@(ViewData["Majors"] as SelectList)">
+                         
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">تاریخ شروع تحصیل</label> <span style="color:darkred">*</span>
+                            <input type="date" asp-for="EditUserViewModel.UniversitysignDate" class="form-control" id="exampleInputPassword1">
+                            <p class="help-block " style="color:darkred">mm:ماه dd:روز yyyy:شمسی   سال   </p>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">شماره دانشجویی</label> <span style="color:darkred">*</span>
+                            <input type="number" asp-for="EditUserViewModel.studentnumber" class="form-control" id="stnum">
+                        </div>
+
+                        <div class="checkbox form-group">
+                            <input id="isteacher" type="checkbox" asp-for="EditUserViewModel.IsTeacher" />
+                            <label for="exampleInputEmail1">استاد است؟</label>
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">کد استاد</label>
+                            <input type="number" asp-for="EditUserViewModel.Teachernumber" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">مدرک</label> <span style="color:darkred">*</span>
+                            <input type="text" asp-for="EditUserViewModel.degree" class="form-control" id="exampleInputPassword1">
+                        </div>
+
+                        <div class="checkbox form-group">
+
+
+                            <input type="checkbox" asp-for="EditUserViewModel.IsActive" />
+                            <label for="exampleInputEmail1">فعال</label>
+                        </div>
+
+                        <div class="checkbox form-group">
+                            <input type="checkbox" asp-for="EditUserViewModel.IsDelete" />
+                            <label for="exampleInputEmail1">حذف شود؟</label>
+
+
+                        </div>
+
+                        <div class="form-group">
+                            <label>نقش ها</label> <span style="color:darkred">*</span>
+                            @if (Roles != null)
+                            {
+                                @foreach (var item in Roles.Where(r => !r.IsDelete))
+                                {
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="SelectedRoles" value="@item.RoleId " @((Model.EditUserViewModel.UserRoles.Any(u=> u == item.RoleId)? "checked" : ""))/>  @item.RoleTitle
+                                        </label>
+                                    </div>
+                                }}
+                        </div>
+                        <div class="row">
+                            <button type="submit" class="btn btn-primary">ثبت</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">تصویر آواتار</h5>
+
+                        <div class="form-group">
+                            <img id="imgAvatar" class="img-fluid" src="~/UserAvatar/@Model.EditUserViewModel.UserAvatarName" />
+                            <input type="file"   id="formControlRange" asp-for="EditUserViewModel.UserAvatar">
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </form>
+    @section Scripts{
+        <script>
+            $('#isteacher').change(function () {
+                if ($(this).is(':checked'))
+                    $('#stnum').prop('disabled', 'disabled')
+            })
+        </script>
+        <script>
+            $('#isteacher').change(function () {
+                if (!this.checked) {
+                    location.reload();
+                }
+            });
+        </script>
+
+        <script>
+
+            $(document).ready(() => {
+                $('#formControlRange').change(function () {
+                    const file = this.files[0];
+                    console.log(file);
+                    if (file) {
+                        let reader = new FileReader();
+                        reader.onload = function (event) {
+                            console.log(event.target.result);
+                            $('#imgAvatar').attr('src', event.target.result);
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+            });
+
+        </script>
+
+    }
+    <!-- end::global scripts -->
+    <!-- begin::chart -->
+ 

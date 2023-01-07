@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "صفحه اصلی";
+}
+@inject Institue.Core.Services.Interface.IUserService _UserService;
+@inject Institue.Core.Services.Interface.IPermissionService _per;
+@{
+    var user = _UserService.GetInfoByUsername(User.Identity.Name);
+
+}
+@if (_per.Checkpermission(3, user.UserName)) { 
+<partial name="_BoxLesson" />
+}

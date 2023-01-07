@@ -1,0 +1,83 @@
+﻿@page "{id}"
+@model InstitueProject.Pages.Admin.Lessons.EditLessonsModel
+ @inject Institue.Core.Services.Interface.ILessonService _lesson;
+
+@{
+    Layout = "_Layout";
+    List<int> leesonmajors = _lesson.MajorsOfLesson(Model.Lesson.LessonId);
+    List<Institue.DataLayer.Entities.User.Major> Major = ViewData["Majors"] as List<Institue.DataLayer.Entities.User.Major>;
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!-- begin::page loader-->
+<div class="page-loader">
+    <div class="spinner-border"></div>
+    <span>در حال بارگذاری ...</span>
+</div>
+<!-- end::page loader -->
+<form method="post">
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"> ویرایش درس  " @Model.Lesson.LessonTitle "</h5>
+
+                    <input hidden asp-for="Lesson.LessonId" />
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">عنوان درس</label>
+                        <input type="text" asp-for="Lesson.LessonTitle" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="عنوان را وارد کنید">
+
+                    </div>
+                    <div class="checkbox form-group">
+                        <input id="isteacher" type="checkbox" asp-for="Lesson.IsExistOnThisYear" />
+
+                        <label for="exampleInputEmail1">امسال ارائه شده؟</label>
+
+
+                    </div> <div class="checkbox form-group">
+                        <input id="isteacher" type="checkbox" asp-for="Lesson.IsDelete" />
+                        <label for="exampleInputEmail1">حذف شود؟</label>
+
+
+                    </div>
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary">ثبت</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">رشته های تحصیلی</h5>
+
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (var majors in Major.Where(m => !m.IsDelete))
+                            {
+                                <li>
+                                    <input type="checkbox" name="SelectedMajors" value="@majors.MajorId" @((leesonmajors.Any(l=>l==majors.MajorId)? "checked" : ""))/> @majors.MajorTitle
+
+
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</form>
+
+
+
