@@ -4,7 +4,7 @@ First go to SqlServer and execute codes of "TabrizUniversity_DataBaseBackUp" fil
  
 ***
 
-You can login with these informations ----->
+You can login with these informations :
 -
         as a Student => Username:alitaami  Password:123  
         as a Teacher => Username:hadi  Password:123  
